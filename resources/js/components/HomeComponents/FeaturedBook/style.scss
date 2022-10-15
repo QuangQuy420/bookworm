@@ -1,0 +1,18 @@
+.container__feature {
+    margin: 40px 0 120px 0;
+
+    & h4 {
+        align-items: center;
+        text-align: center;
+    }
+
+    &-btn {
+        text-align: center;
+    }
+
+    & .container {
+        margin-top: 24px;
+        border: 1px solid rgb(128, 128, 128);
+        border-radius: 2px;
+    }
+}

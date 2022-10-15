@@ -1,10 +1,26 @@
-.container__content {
+.container__onsale {
     max-width: 100%;
 
     & .carousel {
-        height: 500px;
         border: 1px solid rgb(128, 128, 128);
         border-radius: 2px;
+
+        &-control-next,
+        &-control-prev {
+            width: 5%;
+        }
+
+        &-item {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    &-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
     }
 
 }
