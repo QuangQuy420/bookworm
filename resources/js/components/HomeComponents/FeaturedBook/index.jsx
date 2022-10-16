@@ -10,7 +10,7 @@ function FeaturedBook(props) {
 
     const slides = featuredBook.map((item, index) => {
         return (
-            <Col>
+            <Col key={index}>
                 <CardBook />
             </Col>
         );
@@ -20,8 +20,8 @@ function FeaturedBook(props) {
         <div className="container__feature">
             <h4>Featured Books</h4>
             <div className="container__feature-btn">
-                <Button outline>Recommended</Button>
-                <Button outline>Popular</Button>
+                <Button >Recommended</Button>
+                <Button >Popular</Button>
             </div>
             <Container>
                 <Row xs="4">{slides}</Row>

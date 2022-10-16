@@ -28,7 +28,6 @@ function OnSale(props) {
     };
 
     const slides = items.map((item, index) => {
-        console.log(item);
         return (
             <CarouselItem key={index}>
                 <CardBook />
