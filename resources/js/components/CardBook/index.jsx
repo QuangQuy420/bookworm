@@ -6,20 +6,26 @@ import {
     CardText,
     CardFooter,
 } from "reactstrap";
+
 import "./style.scss";
 
 function CardBook(props) {
+    const { detailBook } = props;
+    const { book_title, author_name, book_cover_photo, book_price, sub_price } = detailBook;
+
+    const urlImg = `images/${book_cover_photo ? book_cover_photo : 'book5'}.jpg`;
+
     return (
         <Card className="m-2 mt-4 mb-4">
-            <img className="card__image" alt="Sample" src="https://lh3.googleusercontent.com/kSue6Hy7y1joZRrGLZOhOZKUrQ1OvKFO74qhM5HHztyg71lDHK3K-631VrSiHbljuhBG7pJH90RS3MAPvrcODd90aYy4V93RTw=w960-rj-nu-e365" />
+            <img className="card__image" alt="Sample" src={urlImg} />
             <CardBody>
-                <CardTitle tag="h5">Card title</CardTitle>
-                <CardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card‘s content.
-                </CardText>
+                <CardTitle tag="h5">{book_title}</CardTitle>
+                <CardText>{author_name}</CardText>
             </CardBody>
-            <CardFooter>Footer</CardFooter>
+            <CardFooter>
+                <span className="book-price">{book_price == sub_price ? '' : '$' + book_price}</span>
+                <span className="last-price">{'$' + sub_price}</span>
+            </CardFooter>
         </Card>
     );
 }

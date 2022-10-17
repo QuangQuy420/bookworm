@@ -8,6 +8,25 @@
 
     &-btn {
         text-align: center;
+
+        & .btn-primary {
+
+            background-color: #fff;
+            color: #333;
+            border-color: #fff;
+            
+            &.btn.active,
+            &.btn:hover {
+                background-color: #575b61;
+                border-color: #575b61;
+                color: #fff;
+            }
+        
+            &.btn:focus,
+            &.btn.active:focus {
+                box-shadow: none;
+            }
+        }
     }
 
     & .container {
@@ -16,3 +35,4 @@
         border-radius: 2px;
     }
 }
+

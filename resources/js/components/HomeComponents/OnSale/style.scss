@@ -10,9 +10,15 @@
             width: 5%;
         }
 
+        &-inner {
+            padding: 0 60px;
+        }
+
         &-item {
             display: flex;
             justify-content: center;
+            margin-right: 0;
+            width: 25%;
         }
     }
 

@@ -1,39 +1,35 @@
-import "./style.scss";
 import React, { useState } from "react";
 import { Carousel, CarouselItem, CarouselControl } from "reactstrap";
-import CardBook from "../../CardBook";
 import { Button } from "react-bootstrap";
 
-const items = [
-    {
-        id: 1,
-        altText: "Slide 1",
-        caption: "Slide 1",
-    },
-];
+import CardBook from "../../CardBook";
+import "./style.scss";
 
 function OnSale(props) {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const { saleBooks } = props;
+    const [index, setIndex] = useState(0);
+
+    const displayBook = [
+        saleBooks.slice(0, 4),
+        saleBooks.slice(4, 8),
+        saleBooks.slice(8, 10)
+    ]
 
     const next = () => {
-        const nextIndex =
-            activeIndex === items.length - 1 ? 0 : activeIndex + 1;
-        setActiveIndex(nextIndex);
+        const nextIndex = (index === 3 - 1 ? index : index + 1);
+        setIndex(nextIndex);
     };
 
     const previous = () => {
-        const nextIndex =
-            activeIndex === 0 ? items.length - 1 : activeIndex - 1;
-        setActiveIndex(nextIndex);
+        const prevIndex = (index === 0 ? 0 : index - 1);
+        setIndex(prevIndex);
     };
 
-    const slides = items.map((item, index) => {
+
+    const slides = displayBook[index].map((book, index) => {
         return (
             <CarouselItem key={index}>
-                <CardBook />
-                <CardBook />
-                <CardBook />
-                <CardBook />
+                <CardBook detailBook={book}/>
             </CarouselItem>
         );
     });
