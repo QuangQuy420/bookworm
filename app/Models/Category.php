@@ -12,4 +12,17 @@ class Category extends Model
     public $timestamps = false;
 
     protected $table = 'category';
+
+    public $fillable = [
+        'category_name',
+        'category_desc'
+    ];
+
+    public function scopeGetCategoryName($query) {
+        return $query
+            ->select(
+                'id',
+                'category_name'
+            );
+    }
 }

@@ -7,7 +7,7 @@ function ItemFilter(props) {
 
     const slides = list.map((value, index) => {
         return(
-            <li>value {value}</li>
+            <li key={index}>value {value}</li>
         )
     })
     return (

@@ -16,4 +16,8 @@ class BookRepository {
     public function getPopularBooks() {
         return new BookCollection(Book::getPopularBooks()->paginate(8));
     }
+
+    public function getAllBooks() {
+        return new BookCollection(Book::getAllBooks()->paginate(12));
+    }
 }

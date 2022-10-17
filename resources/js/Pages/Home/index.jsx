@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import FeaturedBook from "../../components/HomeComponents/FeaturedBook";
 import OnSale from "../../components/HomeComponents/OnSale";
 
-import * as bookServices from '../../apiServices/bookServices'
+import * as bookServices from '../../apiServices/bookServices';
 import "./style.scss";
 
 function Home(props) {

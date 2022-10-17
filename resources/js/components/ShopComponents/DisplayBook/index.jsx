@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import * as bookServices from '../../../apiServices/bookServices';
+import CardBook from '../../CardBook';
+
 
 import './style.scss'
 
 function DisplayBook(props) {
 
-    const list = [0,1,2,3,4,5,6]
+    const [ listBooks, setListBook ] = useState([])
+    const list = [0,1,2,3,4,5]
 
-    const slides = list.map((value, index) => {
+    useEffect(() => {
+        const getSaleBooks = async () => {
+            const result = await bookServices.getListBooks('/get-all-books');
+            console.log(result.data);
+            setListBook(result.data);
+        }
+        getSaleBooks()
+    }, []);
+
+    const slides = listBooks.map((data, index) => {
         return (
-            <div className='col-3'>
-                Card {index}
+            <div className='col-3' key={index}>
+                <CardBook detailBook = {data} />
             </div>
         )
     })

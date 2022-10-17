@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\BookRepository;
+use App\Repositories\AuthorRepository;
 
-class BookController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,28 +14,15 @@ class BookController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $bookRepository;
+    protected $authorRepository;
 
-    public function __construct(BookRepository $bookRepository) {
-        return $this->bookRepository = $bookRepository;
+    public function __construct(AuthorRepository $authorRepository) {
+        return $this->authorRepository = $authorRepository;
     }
 
-    public function getSaleBooks() {
-        return $this->bookRepository->getSaleBooks();
+    public function getAuthorName() {
+        return $this->authorRepository->getAuthorName();
     }
-
-    public function getRecommendBooks() {
-        return $this->bookRepository->getRecommendBooks();
-    }
-
-    public function getPopularBooks() {
-        return $this->bookRepository->getPopularBooks();
-    }
-
-    public function getAllBooks() {
-        return $this->bookRepository->getAllBooks();
-    }
-
     public function index()
     {
         //

@@ -22,4 +22,12 @@ class Author extends Model
     public function books() {
         return $this->hasMany(Book::class);
     }
+
+    public function scopeGetAuthorName($query) {
+        return $query
+            ->select(
+                'id',
+                'author_name'
+            );
+    }
 }

@@ -110,4 +110,26 @@ class Book extends Model
             ->orderBy('sub_price', 'ASC')
             ->orderBy('book.book_price', 'ASC');
     }
+
+    public function scopeGetAllBooks($query) {
+        return $query
+            ->leftJoin('author', 'book.author_id', 'author.id')
+            ->leftJoin('discount', 'book.id', 'discount.book_id')
+            ->join('review', 'book.id', 'review.book_id')
+            ->selectRaw('
+                book.id,
+                book.book_title, 
+                book.book_cover_photo,
+                author.author_name,
+                book.book_price,
+                CASE
+                    WHEN discount.discount_start_date >= NOW() THEN book.book_price
+                    WHEN discount.discount_end_date <= NOW() THEN book.book_price
+                    WHEN discount.discount_end_date IS NULL THEN book.book_price
+                    ELSE book.book_price - discount.discount_price
+                END AS sub_price
+            ')
+            ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id')
+            ->orderBy('sub_price', 'DESC');
+    }
 }

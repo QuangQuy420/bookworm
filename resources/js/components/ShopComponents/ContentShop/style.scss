@@ -1,5 +1,9 @@
-.display-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.shop__content {
+    margin-bottom: 150px;
+
+    & .display-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
