@@ -13,7 +13,6 @@ function DisplayBook(props) {
     useEffect(() => {
         const getSaleBooks = async () => {
             const result = await bookServices.getListBooks('/get-all-books');
-            console.log(result.data);
             setListBook(result.data);
         }
         getSaleBooks()

@@ -19,7 +19,6 @@ function Home(props) {
     useEffect(() => {
         const getSaleBooks = async () => {
             const result = await bookServices.getListBooks('/get-sale-books');
-            console.log(result.data);
             setSaleBooks(result.data)
         }
         getSaleBooks()

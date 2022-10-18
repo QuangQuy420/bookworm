@@ -8,3 +8,12 @@ export const getListBooks = async (endpoint, options) => {
         console.log(error);
     }
 };
+
+export const getAllName = async (endpoint) => {
+    try {
+        const res = await request.get(endpoint);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+};

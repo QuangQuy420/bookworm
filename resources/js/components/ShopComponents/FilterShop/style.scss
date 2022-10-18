@@ -1,0 +1,29 @@
+.filter-by {
+    display: flex;
+    height: 38px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.list-filter {
+    margin: 8px 0 24px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.item-filter {
+    padding: 0 8px;
+}
+
+.filter__category,
+.filter__author,
+.filter__rating  {
+    border: 1px solid;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    padding: 12px;
+    
+    & h5 {
+        margin: 0;
+    }
+}

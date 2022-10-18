@@ -1,20 +1,27 @@
 import React from "react";
-import ItemFilter from "../ItemFilter";
+import { useSelector } from "react-redux";
+import Author from "../Author";
+import Category from "../Category";
+import Rating from "../Rating";
 
 import "./style.scss";
 
 function FilterShop(props) {
+    const nameAuthor = useSelector((state) => state.book.listAuthorName);
+    const nameCategory = useSelector((state) => state.book.listCategoryName);
+    const starRating = [0, 1, 2, 3, 4, 5]
+
     return (
         <>
-            <span>Filter By</span>
+            <span className="filter-by">Filter By</span>
             <div className="filter__category">
-                <ItemFilter />
+                <Author listName={nameAuthor}/>
             </div>
             <div className="filter__author">
-                <ItemFilter />
+                <Category listName={nameCategory}/>
             </div>
             <div className="filter__rating">
-                <ItemFilter />
+                <Rating listStar={starRating}/>
             </div>
         </>
     );
