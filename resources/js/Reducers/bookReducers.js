@@ -1,4 +1,5 @@
 const initState = {
+    displayBook: [],
     listCategoryName: [],
     listAuthorName: [],
     filter: {},
@@ -15,6 +16,11 @@ const bookReducer = (state = initState, action) => {
             return {
                 ...state,
                 listAuthorName: action.payload,
+            };
+        case "GET_DISPLAY_BOOK":
+            return {
+                ...state,
+                displayBook: action.payload,
             };
         default:
             return state;

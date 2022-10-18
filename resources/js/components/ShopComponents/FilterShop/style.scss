@@ -6,13 +6,13 @@
 }
 
 .list-filter {
-    margin: 8px 0 24px 0;
+    margin: 8px 0;
     padding: 0;
     list-style: none;
 }
 
 .item-filter {
-    padding: 0 8px;
+    padding: 0 20px;
 }
 
 .filter__category,
@@ -21,9 +21,9 @@
     border: 1px solid;
     margin-bottom: 12px;
     border-radius: 4px;
-    padding: 12px;
+    padding: 12px 0;
     
     & h5 {
-        margin: 0;
+        margin: 0 0 0 12px;
     }
 }
