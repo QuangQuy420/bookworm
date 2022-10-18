@@ -20,8 +20,8 @@ class BookController extends Controller
         return $this->bookRepository = $bookRepository;
     }
 
-    public function getSaleBooks() {
-        return $this->bookRepository->getSaleBooks();
+    public function getSaleBooks(Request $request) {
+        return $this->bookRepository->getSaleBooks($request);
     }
 
     public function getRecommendBooks() {
