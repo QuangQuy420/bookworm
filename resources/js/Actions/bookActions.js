@@ -1,4 +1,7 @@
 import {
+    FILTER_BY_AUTHOR,
+    FILTER_BY_CATEGORY,
+    FILTER_BY_RATING,
     GET_AUTHOR_NAME,
     GET_CATEGORY_NAME,
     GET_DISPLAY_BOOK,
@@ -37,6 +40,27 @@ export const setFilterShow = (data) => {
 export const setFilterSort = (data) => {
     return {
         type: SET_FILTER_SORT,
+        payload: data,
+    };
+};
+
+export const filterByCategory = (data) => {
+    return {
+        type: FILTER_BY_CATEGORY,
+        payload: data,
+    };
+};
+
+export const filterByAuthor = (data) => {
+    return {
+        type: FILTER_BY_AUTHOR,
+        payload: data,
+    };
+};
+
+export const filterByRating = (data) => {
+    return {
+        type: FILTER_BY_RATING,
         payload: data,
     };
 };

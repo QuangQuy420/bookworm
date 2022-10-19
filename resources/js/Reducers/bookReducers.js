@@ -6,6 +6,9 @@ const initState = {
         limit: "12",
         sort: "on-sale",
         link: "/get-sale-books",
+        author: "",
+        category: "",
+        star: "",
     },
 };
 
@@ -41,6 +44,30 @@ const bookReducer = (state = initState, action) => {
                     ...state.filter,
                     sort: action.payload.sort,
                     link: action.payload.link,
+                },
+            };
+        case "FILTER_BY_AUTHOR":
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    author: action.payload,
+                },
+            };
+        case "FILTER_BY_CATEGORY":
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    category: action.payload,
+                },
+            };
+        case "FILTER_BY_RATING":
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    star: action.payload,
                 },
             };
         default:

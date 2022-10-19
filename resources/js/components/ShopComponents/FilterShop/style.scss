@@ -13,6 +13,11 @@
 
 .item-filter {
     padding: 0 20px;
+    cursor: pointer;
+}
+
+.item-active {
+    background-color: rgb(206, 206, 206);
 }
 
 .filter__category,
