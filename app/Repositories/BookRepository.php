@@ -18,14 +18,15 @@ class BookRepository {
     public function getPopularBooks($request) {
         $query = Book::query();
         if($limit = $request->input('limit')){}
-        return new BookCollection(Book::getPopularBooks()->paginate($limit));
+        return new BookCollection(Book::getPopularBooks()->paginate($limit ? $limit : 8));
     }
 
     public function getAllBooks($request) {
         $query = Book::query();
         if($limit = $request->input('limit')){}
         if($sort = $request->input('sort')) {
-            $query->orderBy('sub_price', $sort);
+            $query->orderBy('discount_price', $sort);
+            $query->orderBy('book_price', $sort);
         }
         return new BookCollection($query->getAllBooks()->paginate($limit));
     }

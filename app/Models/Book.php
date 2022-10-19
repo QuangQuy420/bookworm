@@ -57,8 +57,8 @@ class Book extends Model
                 discount.discount_price,
                 book.book_price - discount.discount_price AS sub_price
             ')
-            ->orderBy('discount.discount_price', 'DESC')
-            ->orderBy('sub_price', 'ASC');
+            ->orderBy('sub_price', 'DESC')
+            ->orderBy('discount.discount_price', 'ASC');
     }
 
     public function scopeGetRecommendBooks($query) {
@@ -72,10 +72,11 @@ class Book extends Model
                 book.book_cover_photo,
                 author.author_name,
                 book.book_price,
+                discount.discount_price,
                 CASE
                     WHEN discount.discount_start_date >= NOW() THEN book.book_price
                     WHEN discount.discount_end_date <= NOW() THEN book.book_price
-                    WHEN discount.discount_end_date IS NULL THEN book.book_price
+                    WHEN discount.discount_start_date IS NULL THEN book.book_price
                     ELSE book.book_price - discount.discount_price
                 END AS sub_price,
                 AVG(review.rating_start) AS avg_star
@@ -97,10 +98,11 @@ class Book extends Model
                 book.book_cover_photo,
                 author.author_name,
                 book.book_price,
+                discount.discount_price,
                 CASE
                     WHEN discount.discount_start_date >= NOW() THEN book.book_price
                     WHEN discount.discount_end_date <= NOW() THEN book.book_price
-                    WHEN discount.discount_end_date IS NULL THEN book.book_price
+                    WHEN discount.discount_start_date IS NULL THEN book.book_price
                     ELSE book.book_price - discount.discount_price
                 END AS sub_price,
                 COUNT(review.book_id) AS total_review
@@ -122,14 +124,16 @@ class Book extends Model
                 book.book_cover_photo,
                 author.author_name,
                 book.book_price,
+                discount.discount_price,
                 CASE
                     WHEN discount.discount_start_date >= NOW() THEN book.book_price
                     WHEN discount.discount_end_date <= NOW() THEN book.book_price
-                    WHEN discount.discount_end_date IS NULL THEN book.book_price
+                    WHEN discount.discount_start_date IS NULL THEN book.book_price
                     ELSE book.book_price - discount.discount_price
                 END AS sub_price
             ')
             ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id')
-            ->orderBy('sub_price', 'DESC');
+            ->orderBy('discount_price', 'ASC')
+            ->orderBy('book.book_price', 'ASC');
     }
 }
