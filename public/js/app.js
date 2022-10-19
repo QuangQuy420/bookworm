@@ -11653,7 +11653,8 @@ function CardBook(props) {
       author_name = detailBook.author_name,
       book_cover_photo = detailBook.book_cover_photo,
       book_price = detailBook.book_price,
-      sub_price = detailBook.sub_price;
+      sub_price = detailBook.sub_price,
+      discount_price = detailBook.discount_price;
   var urlImg = "images/".concat(book_cover_photo ? book_cover_photo : 'book5', ".jpg");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.Card, {
     className: "m-2 mt-4 mb-4",
@@ -11674,7 +11675,7 @@ function CardBook(props) {
         children: book_price == sub_price ? '' : '$' + book_price
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
         className: "last-price",
-        children: '$' + sub_price
+        children: '$' + (discount_price ? discount_price : book_price)
       })]
     })]
   });

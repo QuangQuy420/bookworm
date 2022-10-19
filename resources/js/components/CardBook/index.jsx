@@ -11,7 +11,7 @@ import "./style.scss";
 
 function CardBook(props) {
     const { detailBook } = props;
-    const { book_title, author_name, book_cover_photo, book_price, sub_price } = detailBook;
+    const { book_title, author_name, book_cover_photo, book_price, sub_price, discount_price } = detailBook;
 
     const urlImg = `images/${book_cover_photo ? book_cover_photo : 'book5'}.jpg`;
 
@@ -24,7 +24,7 @@ function CardBook(props) {
             </CardBody>
             <CardFooter>
                 <span className="book-price">{book_price == sub_price ? '' : '$' + book_price}</span>
-                <span className="last-price">{'$' + sub_price}</span>
+                <span className="last-price">{'$' + (discount_price ? discount_price : book_price) }</span>
             </CardFooter>
         </Card>
     );
