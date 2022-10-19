@@ -28,12 +28,12 @@ class BookController extends Controller
         return $this->bookRepository->getRecommendBooks();
     }
 
-    public function getPopularBooks() {
-        return $this->bookRepository->getPopularBooks();
+    public function getPopularBooks(Request $request) {
+        return $this->bookRepository->getPopularBooks($request);
     }
 
-    public function getAllBooks() {
-        return $this->bookRepository->getAllBooks();
+    public function getAllBooks(Request $request) {
+        return $this->bookRepository->getAllBooks($request);
     }
 
     public function index()
