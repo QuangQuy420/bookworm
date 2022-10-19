@@ -2,7 +2,11 @@ const initState = {
     displayBook: [],
     listCategoryName: [],
     listAuthorName: [],
-    filter: {},
+    filter: {
+        limit: "12",
+        sort: "on-sale",
+        link: "/get-sale-books",
+    },
 };
 
 const bookReducer = (state = initState, action) => {
@@ -21,6 +25,23 @@ const bookReducer = (state = initState, action) => {
             return {
                 ...state,
                 displayBook: action.payload,
+            };
+        case "SET_FILTER_SHOW":
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    limit: action.payload,
+                },
+            };
+        case "SET_FILTER_SORT":
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    sort: action.payload.sort,
+                    link: action.payload.link,
+                },
             };
         default:
             return state;
