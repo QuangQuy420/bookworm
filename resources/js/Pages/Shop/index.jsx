@@ -3,21 +3,28 @@ import ContentShop from '../../components/ShopComponents/ContentShop';
 import TitleShop from '../../components/ShopComponents/TitleShop';
 
 import * as bookServices from '../../apiServices/bookServices';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAuthorName, getCategoryName, getDisplayBook } from "../../Actions/bookActions";
 import './style.scss'
 
 function Shop(props) {
     const dispatch = useDispatch()
+    const filters = useSelector((state) => state.book.filter)
 
     useEffect(() => {
         const getDisplayBooks = async () => {
-            const endpoint = '/get-sale-books'
-            const response = await bookServices.getListBooks(endpoint);
+            const endpoint = filters.link
+            const filter = {
+                params: {
+                    limit: filters.limit,
+                    sort: filters.sort
+                }
+            }
+            const response = await bookServices.getListBooks(endpoint, filter);
             dispatch(getDisplayBook(response.data));
         }
         getDisplayBooks()
-    }, []);
+    }, [filters]);
 
     useEffect(() => {
         const getNameCategory = async () => {
