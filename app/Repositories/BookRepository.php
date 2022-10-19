@@ -8,9 +8,15 @@ class BookRepository {
     public function getSaleBooks($request) {
         $query = Book::query();
         if($limit = $request->input('limit')){}
+        if($author = $request->input('author')) {
+            $query->where('author_name', $author);
+        }
+        if($category = $request->input('category')) {
+            $query->where('category_name', $category);
+        }
         return new BookCollection($query->getSaleBooks()->paginate($limit));
     }
-
+    
     public function getRecommendBooks() {
         return new BookCollection(Book::getRecommendBooks()->paginate(8));
     }
@@ -18,7 +24,13 @@ class BookRepository {
     public function getPopularBooks($request) {
         $query = Book::query();
         if($limit = $request->input('limit')){}
-        return new BookCollection(Book::getPopularBooks()->paginate($limit ? $limit : 8));
+        if($author = $request->input('author')) {
+            $query->where('author_name', $author);
+        }
+        if($category = $request->input('category')) {
+            $query->where('category_name', $category);
+        }
+        return new BookCollection($query->getPopularBooks()->paginate($limit ? $limit : 8));
     }
 
     public function getAllBooks($request) {
@@ -27,6 +39,12 @@ class BookRepository {
         if($sort = $request->input('sort')) {
             $query->orderBy('discount_price', $sort);
             $query->orderBy('book_price', $sort);
+        }
+        if($author = $request->input('author')) {
+            $query->where('author_name', $author);
+        }
+        if($category = $request->input('category')) {
+            $query->where('category_name', $category);
         }
         return new BookCollection($query->getAllBooks()->paginate($limit));
     }

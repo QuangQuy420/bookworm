@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Discount;
 use App\Models\Author;
 use App\Models\Review;
+use App\Models\Category;
 
 class Book extends Model
 {
@@ -37,10 +38,15 @@ class Book extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function category() {
+        return $this->belongsTo(category::class);
+    }
+
     public function scopeGetSaleBooks($query) {
         return $query
             ->leftJoin('author', 'book.author_id', 'author.id')
             ->leftJoin('discount', 'book.id', 'discount.book_id')
+            ->leftJoin('category', 'book.category_id', 'category.id')
             ->where([
                 ['discount.discount_start_date', '<=', now()->subDays()],
                 ['discount.discount_end_date', '>=', now()->subDays()]
@@ -53,6 +59,7 @@ class Book extends Model
                 book.book_title, 
                 book.book_cover_photo,
                 author.author_name,
+                category.category_name,
                 book.book_price,
                 discount.discount_price,
                 book.book_price - discount.discount_price AS sub_price
@@ -91,12 +98,14 @@ class Book extends Model
         return $query
             ->leftJoin('author', 'book.author_id', 'author.id')
             ->leftJoin('discount', 'book.id', 'discount.book_id')
+            ->leftJoin('category', 'book.category_id', 'category.id')
             ->join('review', 'book.id', 'review.book_id')
             ->selectRaw('
                 book.id,
                 book.book_title, 
                 book.book_cover_photo,
                 author.author_name,
+                category.category_name,
                 book.book_price,
                 discount.discount_price,
                 CASE
@@ -107,7 +116,7 @@ class Book extends Model
                 END AS sub_price,
                 COUNT(review.book_id) AS total_review
             ')
-            ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id')
+            ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id', 'category.id')
             ->orderBy('total_review', 'DESC')
             ->orderBy('sub_price', 'ASC')
             ->orderBy('book.book_price', 'ASC');
@@ -117,12 +126,14 @@ class Book extends Model
         return $query
             ->leftJoin('author', 'book.author_id', 'author.id')
             ->leftJoin('discount', 'book.id', 'discount.book_id')
+            ->leftJoin('category', 'book.category_id', 'category.id')
             ->join('review', 'book.id', 'review.book_id')
             ->selectRaw('
                 book.id,
                 book.book_title, 
                 book.book_cover_photo,
                 author.author_name,
+                category.category_name,
                 book.book_price,
                 discount.discount_price,
                 CASE
@@ -132,7 +143,7 @@ class Book extends Model
                     ELSE book.book_price - discount.discount_price
                 END AS sub_price
             ')
-            ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id')
+            ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id', 'category.id')
             ->orderBy('discount_price', 'ASC')
             ->orderBy('book.book_price', 'ASC');
     }
