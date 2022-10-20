@@ -1,7 +1,10 @@
 import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { filterByRating } from "../../../Actions/bookActions";
 import "./style.scss";
 
 function Rating(props) {
+    const dispatch = useDispatch()
     const { listStar } = props;
     const [active, setActive] = useState(false);
     const [isSwitch, setIsSwitch] = useState(true);
@@ -12,11 +15,13 @@ function Rating(props) {
             setIsSwitch(!isSwitch);
             setActive(true);
             currentIndex.current = index;
+            dispatch(filterByRating(star))
         } 
         else {
             setIsSwitch(!isSwitch);
             setActive(false);
             currentIndex.current = -1;
+            dispatch(filterByRating(''))
         }
     };
 

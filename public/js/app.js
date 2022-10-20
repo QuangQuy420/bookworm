@@ -11312,7 +11312,6 @@ function Shop(props) {
   var filters = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector)(function (state) {
     return state.book.filter;
   });
-  console.log(filters);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var getDisplayBooks = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -11327,7 +11326,8 @@ function Shop(props) {
                     limit: filters.limit,
                     sort: filters.sort,
                     author: filters.author,
-                    category: filters.category
+                    category: filters.category,
+                    star: filters.star
                   }
                 };
                 _context.next = 4;
@@ -12506,8 +12506,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/ShopComponents/Rating/style.scss");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Actions/bookActions */ "./resources/js/Actions/bookActions.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/ShopComponents/Rating/style.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -12526,7 +12528,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 function Rating(props) {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   var listStar = props.listStar;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
@@ -12546,15 +12551,17 @@ function Rating(props) {
       setIsSwitch(!isSwitch);
       setActive(true);
       currentIndex.current = index;
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByRating)(star));
     } else {
       setIsSwitch(!isSwitch);
       setActive(false);
       currentIndex.current = -1;
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByRating)(''));
     }
   };
 
   var slides = listStar.map(function (star, index) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
       className: active && index == currentIndex.current ? "item-filter item-active" : "item-filter",
       onClick: function onClick() {
         return handleFilter(star, index);
@@ -12562,10 +12569,10 @@ function Rating(props) {
       children: [star, " Star"]
     }, index);
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
       children: "Rating Review"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
       className: "list-filter",
       children: slides
     })]

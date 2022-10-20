@@ -10,7 +10,6 @@ import './style.scss'
 function Shop(props) {
     const dispatch = useDispatch()
     const filters = useSelector((state) => state.book.filter)
-    console.log(filters);
 
     useEffect(() => {
         const getDisplayBooks = async () => {
@@ -20,7 +19,8 @@ function Shop(props) {
                     limit: filters.limit,
                     sort: filters.sort,
                     author: filters.author,
-                    category: filters.category
+                    category: filters.category,
+                    star: filters.star
                 }
             }
             const response = await bookServices.getListBooks(endpoint, filter);
