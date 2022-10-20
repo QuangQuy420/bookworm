@@ -14,6 +14,9 @@ class BookRepository {
         if($category = $request->input('category')) {
             $query->where('category_name', $category);
         }
+        if($star = $request->input('star')) {
+            $query->havingRaw('COALESCE(AVG(review.rating_start), 0) >= ?', [$star]);
+        }
         return new BookCollection($query->getSaleBooks()->paginate($limit));
     }
     
@@ -30,6 +33,9 @@ class BookRepository {
         if($category = $request->input('category')) {
             $query->where('category_name', $category);
         }
+        if($star = $request->input('star')) {
+            $query->havingRaw('COALESCE(AVG(review.rating_start), 0) >= ?', [$star]);
+        }
         return new BookCollection($query->getPopularBooks()->paginate($limit ? $limit : 8));
     }
 
@@ -45,6 +51,9 @@ class BookRepository {
         }
         if($category = $request->input('category')) {
             $query->where('category_name', $category);
+        }
+        if($star = $request->input('star')) {
+            $query->havingRaw('COALESCE(AVG(review.rating_start), 0) >= ?', [$star]);
         }
         return new BookCollection($query->getAllBooks()->paginate($limit));
     }

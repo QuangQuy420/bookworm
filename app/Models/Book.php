@@ -41,12 +41,13 @@ class Book extends Model
     public function category() {
         return $this->belongsTo(category::class);
     }
-
+    
     public function scopeGetSaleBooks($query) {
         return $query
             ->leftJoin('author', 'book.author_id', 'author.id')
             ->leftJoin('discount', 'book.id', 'discount.book_id')
             ->leftJoin('category', 'book.category_id', 'category.id')
+            ->leftJoin('review', 'book.id', 'review.book_id')
             ->where([
                 ['discount.discount_start_date', '<=', now()->subDays()],
                 ['discount.discount_end_date', '>=', now()->subDays()]
@@ -62,8 +63,10 @@ class Book extends Model
                 category.category_name,
                 book.book_price,
                 discount.discount_price,
-                book.book_price - discount.discount_price AS sub_price
+                book.book_price - discount.discount_price AS sub_price,
+                COALESCE(AVG(review.rating_start), 0) AS avg_star
             ')
+            ->groupBy('book.id', 'author.id', 'discount.id', 'category.id', 'review.book_id')
             ->orderBy('sub_price', 'DESC')
             ->orderBy('discount.discount_price', 'ASC');
     }
@@ -72,7 +75,7 @@ class Book extends Model
         return $query
             ->leftJoin('author', 'book.author_id', 'author.id')
             ->leftJoin('discount', 'book.id', 'discount.book_id')
-            ->join('review', 'book.id', 'review.book_id')
+            ->leftJoin('review', 'book.id', 'review.book_id')
             ->selectRaw('
                 book.id,
                 book.book_title, 
@@ -86,7 +89,7 @@ class Book extends Model
                     WHEN discount.discount_start_date IS NULL THEN book.book_price
                     ELSE book.book_price - discount.discount_price
                 END AS sub_price,
-                AVG(review.rating_start) AS avg_star
+                COALESCE(AVG(review.rating_start), 0) AS avg_star
             ')
             ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id')
             ->orderBy('avg_star', 'DESC')
@@ -99,7 +102,7 @@ class Book extends Model
             ->leftJoin('author', 'book.author_id', 'author.id')
             ->leftJoin('discount', 'book.id', 'discount.book_id')
             ->leftJoin('category', 'book.category_id', 'category.id')
-            ->join('review', 'book.id', 'review.book_id')
+            ->leftJoin('review', 'book.id', 'review.book_id')
             ->selectRaw('
                 book.id,
                 book.book_title, 
@@ -114,7 +117,8 @@ class Book extends Model
                     WHEN discount.discount_start_date IS NULL THEN book.book_price
                     ELSE book.book_price - discount.discount_price
                 END AS sub_price,
-                COUNT(review.book_id) AS total_review
+                COUNT(review.book_id) AS total_review,
+                COALESCE(AVG(review.rating_start), 0) AS avg_star
             ')
             ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id', 'category.id')
             ->orderBy('total_review', 'DESC')
@@ -127,7 +131,7 @@ class Book extends Model
             ->leftJoin('author', 'book.author_id', 'author.id')
             ->leftJoin('discount', 'book.id', 'discount.book_id')
             ->leftJoin('category', 'book.category_id', 'category.id')
-            ->join('review', 'book.id', 'review.book_id')
+            ->leftJoin('review', 'book.id', 'review.book_id')
             ->selectRaw('
                 book.id,
                 book.book_title, 
@@ -141,7 +145,8 @@ class Book extends Model
                     WHEN discount.discount_end_date <= NOW() THEN book.book_price
                     WHEN discount.discount_start_date IS NULL THEN book.book_price
                     ELSE book.book_price - discount.discount_price
-                END AS sub_price
+                END AS sub_price,
+                COALESCE(AVG(review.rating_start), 0) AS avg_star
             ')
             ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id', 'category.id')
             ->orderBy('discount_price', 'ASC')
