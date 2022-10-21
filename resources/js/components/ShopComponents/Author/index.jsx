@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { filterByAuthor } from "../../../Actions/bookActions";
+import { filterByAuthor, handlePaginate } from "../../../Actions/bookActions";
 import "./style.scss";
 
 function Author(props) {
@@ -16,12 +16,14 @@ function Author(props) {
             setActive(true);
             currentIndex.current = index;
             dispatch(filterByAuthor(authorId))
+            dispatch(handlePaginate(1))
         } 
         else {
             setIsSwitch(!isSwitch);
             setActive(false);
             currentIndex.current = -1;
             dispatch(filterByAuthor(''))
+            dispatch(handlePaginate(1))
         }
     };
 

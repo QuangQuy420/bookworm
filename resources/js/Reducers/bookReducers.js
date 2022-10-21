@@ -1,5 +1,6 @@
 const initState = {
     displayBook: [],
+    pagination: [],
     listCategoryName: [],
     listAuthorName: [],
     filter: {
@@ -9,6 +10,7 @@ const initState = {
         author: "",
         category: "",
         star: "",
+        page: "1",
     },
 };
 
@@ -68,6 +70,19 @@ const bookReducer = (state = initState, action) => {
                 filter: {
                     ...state.filter,
                     star: action.payload,
+                },
+            };
+        case "GET_PAGINATION":
+            return {
+                ...state,
+                pagination: action.payload,
+            };
+        case "HANDLE_PAGINATE":
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    page: action.payload,
                 },
             };
         default:

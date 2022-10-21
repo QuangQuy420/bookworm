@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { filterByRating } from "../../../Actions/bookActions";
+import { filterByRating, handlePaginate } from "../../../Actions/bookActions";
 import "./style.scss";
 
 function Rating(props) {
@@ -16,12 +16,14 @@ function Rating(props) {
             setActive(true);
             currentIndex.current = index;
             dispatch(filterByRating(star))
+            dispatch(handlePaginate(1))
         } 
         else {
             setIsSwitch(!isSwitch);
             setActive(false);
             currentIndex.current = -1;
             dispatch(filterByRating(''))
+            dispatch(handlePaginate(1))
         }
     };
 

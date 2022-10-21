@@ -10896,7 +10896,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "setFilterSort": () => (/* binding */ setFilterSort),
 /* harmony export */   "filterByCategory": () => (/* binding */ filterByCategory),
 /* harmony export */   "filterByAuthor": () => (/* binding */ filterByAuthor),
-/* harmony export */   "filterByRating": () => (/* binding */ filterByRating)
+/* harmony export */   "filterByRating": () => (/* binding */ filterByRating),
+/* harmony export */   "getPagination": () => (/* binding */ getPagination),
+/* harmony export */   "handlePaginate": () => (/* binding */ handlePaginate)
 /* harmony export */ });
 /* harmony import */ var _Constants_bookConstants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Constants/bookConstants */ "./resources/js/Constants/bookConstants.js");
 
@@ -10948,6 +10950,18 @@ var filterByRating = function filterByRating(data) {
     payload: data
   };
 };
+var getPagination = function getPagination(data) {
+  return {
+    type: _Constants_bookConstants__WEBPACK_IMPORTED_MODULE_0__.GET_PAGINATION,
+    payload: data
+  };
+};
+var handlePaginate = function handlePaginate(data) {
+  return {
+    type: _Constants_bookConstants__WEBPACK_IMPORTED_MODULE_0__.HANDLE_PAGINATE,
+    payload: data
+  };
+};
 
 /***/ }),
 
@@ -10967,7 +10981,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SET_FILTER_SORT": () => (/* binding */ SET_FILTER_SORT),
 /* harmony export */   "FILTER_BY_AUTHOR": () => (/* binding */ FILTER_BY_AUTHOR),
 /* harmony export */   "FILTER_BY_CATEGORY": () => (/* binding */ FILTER_BY_CATEGORY),
-/* harmony export */   "FILTER_BY_RATING": () => (/* binding */ FILTER_BY_RATING)
+/* harmony export */   "FILTER_BY_RATING": () => (/* binding */ FILTER_BY_RATING),
+/* harmony export */   "GET_PAGINATION": () => (/* binding */ GET_PAGINATION),
+/* harmony export */   "HANDLE_PAGINATE": () => (/* binding */ HANDLE_PAGINATE)
 /* harmony export */ });
 // Shop Page
 var GET_CATEGORY_NAME = "GET_CATEGORY_NAME";
@@ -10979,6 +10995,8 @@ var SET_FILTER_SORT = "SET_FILTER_SORT";
 var FILTER_BY_AUTHOR = "FILTER_BY_AUTHOR";
 var FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 var FILTER_BY_RATING = "FILTER_BY_RATING";
+var GET_PAGINATION = "GET_PAGINATION";
+var HANDLE_PAGINATE = "HANDLE_PAGINATE";
 
 /***/ }),
 
@@ -11327,7 +11345,8 @@ function Shop(props) {
                     sort: filters.sort,
                     author: filters.author,
                     category: filters.category,
-                    star: filters.star
+                    star: filters.star,
+                    page: filters.page
                   }
                 };
                 _context.next = 4;
@@ -11335,9 +11354,10 @@ function Shop(props) {
 
               case 4:
                 response = _context.sent;
+                dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getPagination)(response.meta));
                 dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getDisplayBook)(response.data));
 
-              case 6:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -11471,6 +11491,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initState = {
   displayBook: [],
+  pagination: [],
   listCategoryName: [],
   listAuthorName: [],
   filter: {
@@ -11479,7 +11500,8 @@ var initState = {
     link: "/get-sale-books",
     author: "",
     category: "",
-    star: ""
+    star: "",
+    page: "1"
   }
 };
 
@@ -11536,6 +11558,18 @@ var bookReducer = function bookReducer() {
       return _objectSpread(_objectSpread({}, state), {}, {
         filter: _objectSpread(_objectSpread({}, state.filter), {}, {
           star: action.payload
+        })
+      });
+
+    case "GET_PAGINATION":
+      return _objectSpread(_objectSpread({}, state), {}, {
+        pagination: action.payload
+      });
+
+    case "HANDLE_PAGINATE":
+      return _objectSpread(_objectSpread({}, state), {}, {
+        filter: _objectSpread(_objectSpread({}, state.filter), {}, {
+          page: action.payload
         })
       });
 
@@ -11695,18 +11729,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/CardBook/style.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -11722,23 +11744,15 @@ function CardBook(props) {
       discount_price = detailBook.discount_price,
       discount_start_date = detailBook.discount_start_date,
       discount_end_date = detailBook.discount_end_date;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
-      _useState2 = _slicedToArray(_useState, 2),
-      lastPrice = _useState2[0],
-      setLastPrice = _useState2[1];
-
   var urlImg = "images/".concat(book_cover_photo ? book_cover_photo : "book5", ".jpg");
 
   var getLastPrice = function getLastPrice() {
     var d = new Date();
-    var dayNow = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    var dayNow = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
     if (discount_start_date < dayNow && discount_end_date > dayNow || discount_start_date < dayNow && discount_end_date == null) {
-      console.log(true);
       return discount_price;
     } else {
-      console.log(false);
       return book_price;
     }
   };
@@ -11759,7 +11773,7 @@ function CardBook(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.CardFooter, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
         className: "book-price",
-        children: book_price == getLastPrice() ? '' : book_price
+        children: book_price == getLastPrice() ? "" : book_price
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
         className: "last-price",
         children: "$" + getLastPrice()
@@ -12160,21 +12174,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/Pagination/style.scss");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Actions/bookActions */ "./resources/js/Actions/bookActions.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/Pagination/style.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 
 
 function Pagination(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+  var pagination = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.book.pagination;
+  });
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  var current_page = pagination.current_page,
+      last_page = pagination.last_page;
+
+  var handlePrevPage = function handlePrevPage() {
+    dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(current_page - 1));
+  };
+
+  var handleNextPage = function handleNextPage() {
+    dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(current_page + 1));
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "pagination",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-      children: "Previos"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-      children: "1"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      disabled: current_page == 1 ? true : false,
+      onClick: handlePrevPage,
+      children: "Previous"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      children: current_page
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      disabled: current_page == last_page ? true : false,
+      onClick: handleNextPage,
       children: "Next"
     })]
   });
@@ -12243,11 +12280,13 @@ function Author(props) {
       setActive(true);
       currentIndex.current = index;
       dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByAuthor)(authorId));
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
     } else {
       setIsSwitch(!isSwitch);
       setActive(false);
       currentIndex.current = -1;
       dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByAuthor)(''));
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
     }
   };
 
@@ -12333,11 +12372,13 @@ function Category(props) {
       setActive(true);
       currentIndex.current = index;
       dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByCategory)(categoryId));
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
     } else {
       setIsSwitch(!isSwitch);
       setActive(false);
       currentIndex.current = -1;
       dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByCategory)(''));
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
     }
   };
 
@@ -12585,11 +12626,13 @@ function Rating(props) {
       setActive(true);
       currentIndex.current = index;
       dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByRating)(star));
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
     } else {
       setIsSwitch(!isSwitch);
       setActive(false);
       currentIndex.current = -1;
       dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByRating)(''));
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
     }
   };
 
@@ -12657,6 +12700,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function SortShop(props) {
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  var pagination = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.book.pagination;
+  });
+  var from = pagination.from,
+      to = pagination.to,
+      total = pagination.total;
   var itemShow = [5, 10, 15, 20];
   var itemSort = ['Sort by On Sale', 'Sort by Popular', 'Sort by price: low to high', 'Sort by price: high to low'];
 
@@ -12673,6 +12722,7 @@ function SortShop(props) {
   var handleFilterShow = function handleFilterShow(value) {
     setDisplayShow("Show ".concat(value));
     dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.setFilterShow)(value));
+    dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
   };
 
   var handleFilterSort = function handleFilterSort(value, index) {
@@ -12695,6 +12745,7 @@ function SortShop(props) {
 
     setDisplaySort(value);
     dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.setFilterSort)(data));
+    dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
   };
 
   var slideShow = itemShow.map(function (value) {
@@ -12714,8 +12765,8 @@ function SortShop(props) {
     }, value);
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-      children: "Show 1 - 10 of 125 books"
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+      children: ["Show ", from, " - ", to, " of ", total, " books"]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.UncontrolledDropdown, {
@@ -12757,20 +12808,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/ShopComponents/TitleShop/style.scss");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/ShopComponents/TitleShop/style.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
 
 
 function TitleShop(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+  var initState = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.book;
+  });
+  var listAuthorName = initState.listAuthorName,
+      listCategoryName = initState.listCategoryName,
+      filter = initState.filter;
+  var author = filter.author,
+      category = filter.category,
+      star = filter.star;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "shop__title",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
       children: "Books"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-      children: " (Filtered by Category #1)"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+      children: [" ", "(Filtered by", " ", author && listAuthorName[author] ? "Author: ".concat(listAuthorName[author].author_name) : "", " ", category && listCategoryName[category] ? "Category: ".concat(listCategoryName[category].category_name) : "", " ", star ? "Over ".concat(star, " Star") : "", ")"]
     })]
   });
 }

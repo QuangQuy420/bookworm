@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setFilterShow, setFilterSort } from "../../../Actions/bookActions";
+import { useDispatch, useSelector } from "react-redux";
+import { handlePaginate, setFilterShow, setFilterSort } from "../../../Actions/bookActions";
 import {
     ButtonGroup,
     DropdownItem,
@@ -13,6 +13,8 @@ import "./style.scss";
 
 function SortShop(props) {
     const dispatch = useDispatch()
+    const pagination = useSelector(state => state.book.pagination)
+    const { from, to, total } = pagination
 
     const itemShow = [5, 10, 15, 20]
     const itemSort = ['Sort by On Sale', 'Sort by Popular', 'Sort by price: low to high', 'Sort by price: high to low']
@@ -22,6 +24,7 @@ function SortShop(props) {
     const handleFilterShow = (value) => {
         setDisplayShow(`Show ${value}`)
         dispatch(setFilterShow(value))
+        dispatch(handlePaginate(1))
     } 
 
     const handleFilterSort = (value, index) => {
@@ -47,6 +50,7 @@ function SortShop(props) {
         }  
         setDisplaySort(value)
         dispatch(setFilterSort(data))
+        dispatch(handlePaginate(1))
     }
 
     const slideShow = itemShow.map(value => {
@@ -73,7 +77,7 @@ function SortShop(props) {
 
     return (
         <>
-            <span>Show 1 - 10 of 125 books</span>
+            <span>Show {from} - {to} of {total} books</span>
             <div>
                 <ButtonGroup>
                     <UncontrolledDropdown>

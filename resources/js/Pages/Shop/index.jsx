@@ -4,7 +4,7 @@ import TitleShop from '../../components/ShopComponents/TitleShop';
 
 import * as bookServices from '../../apiServices/bookServices';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthorName, getCategoryName, getDisplayBook } from "../../Actions/bookActions";
+import { getAuthorName, getCategoryName, getDisplayBook, getPagination } from "../../Actions/bookActions";
 import './style.scss'
 
 function Shop(props) {
@@ -20,10 +20,12 @@ function Shop(props) {
                     sort: filters.sort,
                     author: filters.author,
                     category: filters.category,
-                    star: filters.star
+                    star: filters.star,
+                    page: filters.page
                 }
             }
             const response = await bookServices.getListBooks(endpoint, filter);
+            dispatch(getPagination(response.meta));
             dispatch(getDisplayBook(response.data));
         }
         getDisplayBooks()

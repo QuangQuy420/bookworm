@@ -5,6 +5,8 @@ import {
     GET_AUTHOR_NAME,
     GET_CATEGORY_NAME,
     GET_DISPLAY_BOOK,
+    GET_PAGINATION,
+    HANDLE_PAGINATE,
     SET_FILTER_SHOW,
     SET_FILTER_SORT,
 } from "../Constants/bookConstants";
@@ -61,6 +63,20 @@ export const filterByAuthor = (data) => {
 export const filterByRating = (data) => {
     return {
         type: FILTER_BY_RATING,
+        payload: data,
+    };
+};
+
+export const getPagination = (data) => {
+    return {
+        type: GET_PAGINATION,
+        payload: data,
+    };
+};
+
+export const handlePaginate = (data) => {
+    return {
+        type: HANDLE_PAGINATE,
         payload: data,
     };
 };

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { filterByCategory } from "../../../Actions/bookActions";
+import { filterByCategory, handlePaginate } from "../../../Actions/bookActions";
 import "./style.scss";
 
 function Category(props) {
@@ -16,12 +16,14 @@ function Category(props) {
             setActive(true);
             currentIndex.current = index;
             dispatch(filterByCategory(categoryId))
+            dispatch(handlePaginate(1))
         } 
         else {
             setIsSwitch(!isSwitch);
             setActive(false);
             currentIndex.current = -1;
             dispatch(filterByCategory(''))
+            dispatch(handlePaginate(1))
         }
     };
 
