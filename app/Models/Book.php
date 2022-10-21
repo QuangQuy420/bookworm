@@ -41,13 +41,30 @@ class Book extends Model
     public function category() {
         return $this->belongsTo(category::class);
     }
-    
-    public function scopeGetSaleBooks($query) {
+
+    public function scopeGetListBooks($query) {
         return $query
             ->leftJoin('author', 'book.author_id', 'author.id')
             ->leftJoin('discount', 'book.id', 'discount.book_id')
             ->leftJoin('category', 'book.category_id', 'category.id')
             ->leftJoin('review', 'book.id', 'review.book_id')
+            ->select(
+                'book.id',
+                'book.book_title', 
+                'book.book_cover_photo',
+                'book.author_id',
+                'author.author_name',
+                'book.category_id',
+                'book.book_price',
+                'discount.discount_price',
+                'discount.discount_start_date',
+                'discount.discount_end_date'
+            )
+            ->groupBy('book.id', 'author.id', 'discount.id');
+    }
+
+    public function scopeGetSaleBooks($query) {
+        return $query
             ->where([
                 ['discount.discount_start_date', '<=', now()->subDays()],
                 ['discount.discount_end_date', '>=', now()->subDays()]
@@ -55,101 +72,45 @@ class Book extends Model
                 ['discount.discount_start_date', '<=', now()->subDays()],
                 ['discount.discount_end_date', NULL]
             ])
-            ->selectRaw('
-                book.id,
-                book.book_title, 
-                book.book_cover_photo,
-                author.author_name,
-                category.category_name,
-                book.book_price,
-                discount.discount_price,
-                book.book_price - discount.discount_price AS sub_price,
-                COALESCE(AVG(review.rating_start), 0) AS avg_star
-            ')
-            ->groupBy('book.id', 'author.id', 'discount.id', 'category.id', 'review.book_id')
-            ->orderBy('sub_price', 'DESC')
+            ->orderByRaw('book.book_price - discount.discount_price DESC')
             ->orderBy('discount.discount_price', 'ASC');
     }
 
     public function scopeGetRecommendBooks($query) {
         return $query
-            ->leftJoin('author', 'book.author_id', 'author.id')
-            ->leftJoin('discount', 'book.id', 'discount.book_id')
-            ->leftJoin('review', 'book.id', 'review.book_id')
-            ->selectRaw('
-                book.id,
-                book.book_title, 
-                book.book_cover_photo,
-                author.author_name,
-                book.book_price,
-                discount.discount_price,
+            ->orderByRaw('COALESCE(AVG(review.rating_start), 0) DESC')
+            ->orderByRaw('
                 CASE
                     WHEN discount.discount_start_date >= NOW() THEN book.book_price
                     WHEN discount.discount_end_date <= NOW() THEN book.book_price
                     WHEN discount.discount_start_date IS NULL THEN book.book_price
-                    ELSE book.book_price - discount.discount_price
-                END AS sub_price,
-                COALESCE(AVG(review.rating_start), 0) AS avg_star
-            ')
-            ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id')
-            ->orderBy('avg_star', 'DESC')
-            ->orderBy('sub_price', 'ASC')
-            ->orderBy('book.book_price', 'ASC');
+                    ELSE discount.discount_price
+                END
+            ');
     }
 
     public function scopeGetPopularBooks($query) {
         return $query
-            ->leftJoin('author', 'book.author_id', 'author.id')
-            ->leftJoin('discount', 'book.id', 'discount.book_id')
-            ->leftJoin('category', 'book.category_id', 'category.id')
-            ->leftJoin('review', 'book.id', 'review.book_id')
-            ->selectRaw('
-                book.id,
-                book.book_title, 
-                book.book_cover_photo,
-                author.author_name,
-                category.category_name,
-                book.book_price,
-                discount.discount_price,
+            ->orderByRaw('COALESCE(COUNT(review.rating_start), 0) DESC')
+            ->orderByRaw('
                 CASE
                     WHEN discount.discount_start_date >= NOW() THEN book.book_price
                     WHEN discount.discount_end_date <= NOW() THEN book.book_price
                     WHEN discount.discount_start_date IS NULL THEN book.book_price
-                    ELSE book.book_price - discount.discount_price
-                END AS sub_price,
-                COUNT(review.book_id) AS total_review,
-                COALESCE(AVG(review.rating_start), 0) AS avg_star
-            ')
-            ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id', 'category.id')
-            ->orderBy('total_review', 'DESC')
-            ->orderBy('sub_price', 'ASC')
-            ->orderBy('book.book_price', 'ASC');
+                    ELSE discount.discount_price
+                END
+            ');
     }
 
-    public function scopeGetAllBooks($query) {
+    public function scopeGetAllBooks($query, $sort) {
         return $query
-            ->leftJoin('author', 'book.author_id', 'author.id')
-            ->leftJoin('discount', 'book.id', 'discount.book_id')
-            ->leftJoin('category', 'book.category_id', 'category.id')
-            ->leftJoin('review', 'book.id', 'review.book_id')
-            ->selectRaw('
-                book.id,
-                book.book_title, 
-                book.book_cover_photo,
-                author.author_name,
-                category.category_name,
-                book.book_price,
-                discount.discount_price,
+            ->orderByRaw('
                 CASE
                     WHEN discount.discount_start_date >= NOW() THEN book.book_price
                     WHEN discount.discount_end_date <= NOW() THEN book.book_price
                     WHEN discount.discount_start_date IS NULL THEN book.book_price
-                    ELSE book.book_price - discount.discount_price
-                END AS sub_price,
-                COALESCE(AVG(review.rating_start), 0) AS avg_star
-            ')
-            ->groupBy('book.id', 'review.book_id', 'author.id', 'discount.id', 'category.id')
-            ->orderBy('discount_price', 'ASC')
-            ->orderBy('book.book_price', 'ASC');
+                    ELSE discount.discount_price 
+                END ' .$sort
+            );
     }
 }

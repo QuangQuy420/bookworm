@@ -5,56 +5,41 @@ use App\Models\Book;
 use App\Http\Resources\BookCollection;
 
 class BookRepository {
-    public function getSaleBooks($request) {
-        $query = Book::query();
-        if($limit = $request->input('limit')){}
+
+    protected $limit;
+    protected $sort;
+    public function filterBook($request) {
+        $query = Book::getListBooks();
+        if($this->limit = $request->input('limit')){}
+        if($this->sort = $request->input('sort')) {}
         if($author = $request->input('author')) {
-            $query->where('author_name', $author);
+            $query->where('book.author_id', $author);
         }
         if($category = $request->input('category')) {
-            $query->where('category_name', $category);
+            $query->where('book.category_id', $category);
         }
         if($star = $request->input('star')) {
             $query->havingRaw('COALESCE(AVG(review.rating_start), 0) >= ?', [$star]);
         }
-        return new BookCollection($query->getSaleBooks()->paginate($limit));
+        return $query;
     }
-    
+
+    public function getSaleBooks($request) {
+        $result = $this->filterBook($request);
+        return new BookCollection($result->getSaleBooks()->paginate($this->limit));
+    }
+
     public function getRecommendBooks() {
-        return new BookCollection(Book::getRecommendBooks()->paginate(8));
+        return new BookCollection(Book::getListBooks()->getRecommendBooks()->paginate(8));
     }
 
     public function getPopularBooks($request) {
-        $query = Book::query();
-        if($limit = $request->input('limit')){}
-        if($author = $request->input('author')) {
-            $query->where('author_name', $author);
-        }
-        if($category = $request->input('category')) {
-            $query->where('category_name', $category);
-        }
-        if($star = $request->input('star')) {
-            $query->havingRaw('COALESCE(AVG(review.rating_start), 0) >= ?', [$star]);
-        }
-        return new BookCollection($query->getPopularBooks()->paginate($limit ? $limit : 8));
+        $result = $this->filterBook($request);
+        return new BookCollection($result->getPopularBooks()->paginate($this->limit ? $this->limit : 8));
     }
 
     public function getAllBooks($request) {
-        $query = Book::query();
-        if($limit = $request->input('limit')){}
-        if($sort = $request->input('sort')) {
-            $query->orderBy('discount_price', $sort);
-            $query->orderBy('book_price', $sort);
-        }
-        if($author = $request->input('author')) {
-            $query->where('author_name', $author);
-        }
-        if($category = $request->input('category')) {
-            $query->where('category_name', $category);
-        }
-        if($star = $request->input('star')) {
-            $query->havingRaw('COALESCE(AVG(review.rating_start), 0) >= ?', [$star]);
-        }
-        return new BookCollection($query->getAllBooks()->paginate($limit));
+        $result = $this->filterBook($request);
+        return new BookCollection($result->getAllBooks($this->sort)->paginate($this->limit));
     }
 }
