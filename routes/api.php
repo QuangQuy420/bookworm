@@ -28,5 +28,4 @@ Route::get('/get-popular-books', [BookController::class, 'getPopularBooks']);
 Route::get('/get-all-books', [BookController::class, 'getAllBooks']);
 
 Route::get('/get-category-name', [CategoryController::class, 'getCategoryName']);
-
 Route::get('/get-author-name', [AuthorController::class, 'getAuthorName']);

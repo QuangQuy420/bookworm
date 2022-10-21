@@ -10,12 +10,12 @@ function Category(props) {
     const [isSwitch, setIsSwitch] = useState(true);
     const currentIndex = useRef(-1);
 
-    const handleFilter = (name, index) => {
+    const handleFilter = (categoryId, index) => {
         if (currentIndex.current !== index) {
             setIsSwitch(!isSwitch);
             setActive(true);
             currentIndex.current = index;
-            dispatch(filterByCategory(name))
+            dispatch(filterByCategory(categoryId))
         } 
         else {
             setIsSwitch(!isSwitch);
@@ -34,7 +34,7 @@ function Category(props) {
                         : "item-filter"
                 }
                 key={index}
-                onClick={() => handleFilter(value.category_name, index)}
+                onClick={() => handleFilter(value.id, index)}
             >
                 {value.category_name}
             </li>

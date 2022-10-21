@@ -10,12 +10,12 @@ function Author(props) {
     const [isSwitch, setIsSwitch] = useState(true);
     const currentIndex = useRef(-1);
 
-    const handleFilter = (name, index) => {
+    const handleFilter = (authorId, index) => {
         if (currentIndex.current !== index) {
             setIsSwitch(!isSwitch);
             setActive(true);
             currentIndex.current = index;
-            dispatch(filterByAuthor(name))
+            dispatch(filterByAuthor(authorId))
         } 
         else {
             setIsSwitch(!isSwitch);
@@ -34,7 +34,7 @@ function Author(props) {
                         : "item-filter"
                 }
                 key={index}
-                onClick={() => handleFilter(value.author_name, index)}
+                onClick={() => handleFilter(value.id, index)}
             >
                 {value.author_name}
             </li>
