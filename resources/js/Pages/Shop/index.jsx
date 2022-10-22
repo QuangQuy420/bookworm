@@ -34,7 +34,7 @@ function Shop(props) {
     useEffect(() => {
         const getNameCategory = async () => {
             const result = await bookServices.getAllName('/get-category-name');
-            dispatch(getCategoryName(result))
+            dispatch(getCategoryName(result.category))
         }
         getNameCategory()
     }, []);
@@ -42,7 +42,8 @@ function Shop(props) {
     useEffect(() => {
         const getNameAuthor = async () => {
             const result = await bookServices.getAllName('/get-author-name');
-            dispatch(getAuthorName(result))
+            console.log(result.author);
+            dispatch(getAuthorName(result.author))
         }
         getNameAuthor()
     }, []);

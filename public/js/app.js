@@ -11385,7 +11385,7 @@ function Shop(props) {
 
               case 2:
                 result = _context2.sent;
-                dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getCategoryName)(result));
+                dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getCategoryName)(result.category));
 
               case 4:
               case "end":
@@ -11415,9 +11415,10 @@ function Shop(props) {
 
               case 2:
                 result = _context3.sent;
-                dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getAuthorName)(result));
+                console.log(result.author);
+                dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getAuthorName)(result.author));
 
-              case 4:
+              case 5:
               case "end":
                 return _context3.stop();
             }
