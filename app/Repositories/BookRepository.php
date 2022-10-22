@@ -3,6 +3,8 @@
 namespace App\Repositories;
 use App\Models\Book;
 use App\Http\Resources\BookCollection;
+use App\Http\Resources\ReviewCollection;
+use App\Http\Resources\BookResource;
 
 class BookRepository {
 
@@ -26,20 +28,36 @@ class BookRepository {
 
     public function getSaleBooks($request) {
         $result = $this->filterBook($request);
-        return new BookCollection($result->getSaleBooks()->paginate($this->limit));
+        $result = new BookCollection($result->getSaleBooks()->paginate($this->limit));
+
+        return response()->json([
+            'ListBook' => $result
+        ], 200);
     }
 
     public function getRecommendBooks() {
-        return new BookCollection(Book::getListBooks()->getRecommendBooks()->paginate(8));
+        $result = new BookCollection(Book::getListBooks()->getRecommendBooks()->paginate(8));
+
+        return response()->json([
+            'ListBook' => $result
+        ], 200);
     }
 
     public function getPopularBooks($request) {
         $result = $this->filterBook($request);
-        return new BookCollection($result->getPopularBooks()->paginate($this->limit ? $this->limit : 8));
+        $result = new BookCollection($result->getPopularBooks()->paginate($this->limit ? $this->limit : 8));
+
+        return response()->json([
+            'ListBook' => $result
+        ], 200);
     }
 
     public function getAllBooks($request) {
         $result = $this->filterBook($request);
-        return new BookCollection($result->getAllBooks($this->sort)->paginate($this->limit));
+        $result = new BookCollection($result->getAllBooks($this->sort)->paginate($this->limit));
+
+        return response()->json([
+            'ListBook' => $result
+        ], 200);
     }
 }

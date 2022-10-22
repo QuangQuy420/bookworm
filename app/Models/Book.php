@@ -51,6 +51,7 @@ class Book extends Model
             ->select(
                 'book.id',
                 'book.book_title', 
+                'book.book_summary',
                 'book.book_cover_photo',
                 'book.author_id',
                 'author.author_name',
