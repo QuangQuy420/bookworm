@@ -10,29 +10,12 @@ function CardBook(props) {
         author_name,
         book_cover_photo,
         book_price,
-        discount_price,
-        discount_start_date,
-        discount_end_date,
+        final_price,
     } = detailBook;
 
     const urlImg = `images/${
         book_cover_photo ? book_cover_photo : "book5"
     }.jpg`;
-
-    const getLastPrice = () => {
-        const d = new Date();
-        const dayNow =
-            d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-
-        if (
-            (discount_start_date < dayNow && discount_end_date > dayNow) ||
-            (discount_start_date < dayNow && discount_end_date == null)
-        ) {
-            return discount_price;
-        } else {
-            return book_price;
-        }
-    };
 
     return (
         <Card className="m-2 mt-4 mb-4">
@@ -43,9 +26,9 @@ function CardBook(props) {
             </CardBody>
             <CardFooter>
                 <span className="book-price">
-                    {book_price == getLastPrice() ? "" : book_price}
+                    {book_price == final_price ?  "" : book_price}
                 </span>
-                <span className="last-price">{"$" + getLastPrice()}</span>
+                <span className="last-price">{"$" + final_price}</span>
             </CardFooter>
         </Card>
     );

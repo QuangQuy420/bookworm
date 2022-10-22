@@ -11199,7 +11199,7 @@ function Home(props) {
 
               case 2:
                 result = _context.sent;
-                setSaleBooks(result.data);
+                setSaleBooks(result.ListBook.data);
 
               case 4:
               case "end":
@@ -11229,7 +11229,7 @@ function Home(props) {
 
               case 2:
                 result = _context2.sent;
-                setFeaturedBooks(result.data);
+                setFeaturedBooks(result.ListBook.data);
 
               case 4:
               case "end":
@@ -11354,8 +11354,8 @@ function Shop(props) {
 
               case 4:
                 response = _context.sent;
-                dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getPagination)(response.meta));
-                dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getDisplayBook)(response.data));
+                dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getPagination)(response.ListBook.meta));
+                dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getDisplayBook)(response.ListBook.data));
 
               case 7:
               case "end":
@@ -11741,22 +11741,8 @@ function CardBook(props) {
       author_name = detailBook.author_name,
       book_cover_photo = detailBook.book_cover_photo,
       book_price = detailBook.book_price,
-      discount_price = detailBook.discount_price,
-      discount_start_date = detailBook.discount_start_date,
-      discount_end_date = detailBook.discount_end_date;
+      final_price = detailBook.final_price;
   var urlImg = "images/".concat(book_cover_photo ? book_cover_photo : "book5", ".jpg");
-
-  var getLastPrice = function getLastPrice() {
-    var d = new Date();
-    var dayNow = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-
-    if (discount_start_date < dayNow && discount_end_date > dayNow || discount_start_date < dayNow && discount_end_date == null) {
-      return discount_price;
-    } else {
-      return book_price;
-    }
-  };
-
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.Card, {
     className: "m-2 mt-4 mb-4",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
@@ -11773,10 +11759,10 @@ function CardBook(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.CardFooter, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
         className: "book-price",
-        children: book_price == getLastPrice() ? "" : book_price
+        children: book_price == final_price ? "" : book_price
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
         className: "last-price",
-        children: "$" + getLastPrice()
+        children: "$" + final_price
       })]
     })]
   });

@@ -19,7 +19,7 @@ function Home(props) {
     useEffect(() => {
         const getSaleBooks = async () => {
             const result = await bookServices.getListBooks('/get-sale-books');
-            setSaleBooks(result.data)
+            setSaleBooks(result.ListBook.data)
         }
         getSaleBooks()
     }, []);
@@ -27,7 +27,7 @@ function Home(props) {
     useEffect(() => {
         const getFeaturedBooks = async () => {
             const result = await bookServices.getListBooks(apiUrl);
-            setFeaturedBooks(result.data)
+            setFeaturedBooks(result.ListBook.data)
         }
         getFeaturedBooks()
     }, [apiUrl]);

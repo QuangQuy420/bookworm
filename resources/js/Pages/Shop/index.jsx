@@ -25,8 +25,8 @@ function Shop(props) {
                 }
             }
             const response = await bookServices.getListBooks(endpoint, filter);
-            dispatch(getPagination(response.meta));
-            dispatch(getDisplayBook(response.data));
+            dispatch(getPagination(response.ListBook.meta));
+            dispatch(getDisplayBook(response.ListBook.data));
         }
         getDisplayBooks()
     }, [filters]);
