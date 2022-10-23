@@ -60,14 +60,4 @@ class BookRepository {
             'ListBook' => $result
         ], 200);
     }
-
-    public function getDetailBook($id) {
-        $book = Book::getListBooks()->findOrFail($id);
-        $reviews = Book::findOrFail($id)->reviews()->paginate(4);
-
-        return response()->json([
-            'detailBook' => new BookResource($book),
-            'reviews' => new ReviewCollection($reviews)
-        ], 200);
-    }
 }

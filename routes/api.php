@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AuthorController;
+use App\Http\Controllers\Api\ReviewController;
 
 
 /*
@@ -27,7 +28,8 @@ Route::get('/get-recommend-books', [BookController::class, 'getRecommendBooks'])
 Route::get('/get-popular-books', [BookController::class, 'getPopularBooks']);
 Route::get('/get-all-books', [BookController::class, 'getAllBooks']);
 
-Route::resource('get-detail-book', BookController::class)->only(['show']);
-
 Route::get('/get-category-name', [CategoryController::class, 'getCategoryName']);
 Route::get('/get-author-name', [AuthorController::class, 'getAuthorName']);
+
+Route::resource('/get-detail-reviews', ReviewController::class)->only(['show']);
+

@@ -25,4 +25,22 @@ class Review extends Model
     public function book() {
         return $this->belongsTo(Book::class);
     }
+
+    public function scopeGetDetailReviews($query, $id) {
+        return $query
+            ->where('review.book_id', $id)
+            ->selectRaw('
+                COALESCE(AVG(review.rating_start), 0) AS avg_rating,
+                COALESCE(COUNT(review.rating_start), 0) AS total_rating
+            ')
+            ->groupBy('review.book_id');
+    }
+
+    public function scopeGetTotalRating($query, $id, $star) {
+        return $query
+            ->where('review.book_id', $id)
+            ->selectRaw('COUNT(review.rating_start) AS star_' .$star)
+            ->groupBy('review.rating_start')
+            ->havingRaw('review.rating_start = ?', [$star]);
+    }
 }
