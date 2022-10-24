@@ -42,7 +42,6 @@ function Shop(props) {
     useEffect(() => {
         const getNameAuthor = async () => {
             const result = await bookServices.getAllName('/get-author-name');
-            console.log(result.author);
             dispatch(getAuthorName(result.author))
         }
         getNameAuthor()

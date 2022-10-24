@@ -1,0 +1,90 @@
+.review {
+    border: 1px solid rgb(108, 108, 108);
+    border-radius: 4px;
+    padding: 0 24px;
+
+    &__title {
+        display: flex;
+        align-items: center;
+        margin: 24px 0;
+
+        & h5 {
+            margin: 0 8px 2px 0;
+        }
+    }
+
+    &__total {
+        display: flex;
+
+        &-star {
+            margin-right: 20px;
+            text-decoration: underline;
+        }
+
+        &-item {
+            position: relative;
+            padding: 0 12px;
+            text-decoration: underline;
+        }
+
+        &-item::after {
+            display: block;
+            position: absolute;
+            content: "";
+            height: 60%;
+            width: 1px;
+            top: 20%;
+            left: 100%;
+            background-color: rgb(108, 108, 108);
+        }
+    }
+
+    &__filter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 24px 0 24px 0;
+    }
+
+    &__detail {
+        position: relative;
+        margin-top: 16px;
+        padding-bottom: 16px;
+
+        &::after {
+            display: block;
+            position: absolute;
+            content: "";
+            height: 1px;
+            width: 100%;
+            bottom: 0;
+            background-color: rgb(108, 108, 108);
+        }
+
+        &-title {
+            display: flex;
+            align-items: center;
+
+            & span {
+                position: relative;
+                padding-left: 12px;
+                margin-left: 12px;
+            }
+
+            & span::before {
+                display: block;
+                position: absolute;
+                content: "";
+                height: 60%;
+                width: 1px;
+                top: 20%;
+                left: 0;
+                background-color: rgb(108, 108, 108);
+            }
+        }
+    }
+
+    &__paginate {
+        margin: 24px 0;
+    }
+}

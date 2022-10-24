@@ -1,0 +1,55 @@
+.order {
+    padding: 0 0 0 24px;
+
+    &__add {
+        border: 1px solid rgb(108, 108, 108);
+        border-radius: 4px;
+    }
+
+    &__price {
+        background-color: rgb(221, 221, 221);
+        border-radius: 4px;
+        border-bottom: 1px solid rgb(108, 108, 108);
+        display: flex;
+        padding: 6px;
+        align-items: center;
+
+        & span {
+            margin-right: 6px;
+            font-size: 20px;
+        }
+
+        & h5 {
+            margin: 0;
+            font-size: 28px;
+        }
+    }
+
+    &__handle {
+        margin: 32px;
+    }
+
+    &__quantity {
+        background-color: rgb(221, 221, 221);
+        display: flex;
+        justify-content: space-between;
+        font-size: 24px;
+        padding: 0 4px;
+        margin: 8px 0;
+    }
+
+    &__increase,
+    &__decrease {
+        border: none;
+        background-color: rgb(221, 221, 221);
+    }
+
+    &__buy {
+        margin-top: 36px;
+        font-size: 22px;
+        font-weight: 400;
+        border: none;
+        background-color: rgb(221, 221, 221);
+        width: 100%;
+    }
+}

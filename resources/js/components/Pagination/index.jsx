@@ -23,7 +23,7 @@ function Pagination(props) {
                 disabled={current_page == 1 ? true : false}
                 onClick={handlePrevPage}
             >
-                Previous
+                Prev
             </button>
             <button>{current_page}</button>
             <button

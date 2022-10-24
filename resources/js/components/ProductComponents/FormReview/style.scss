@@ -1,0 +1,36 @@
+.review {
+    &__form {
+    padding: 0 0 0 24px;
+    }
+
+    &__add {
+        border: 1px solid rgb(108, 108, 108);
+        border-radius: 4px;
+
+        &-title {
+            display: block;
+            border-radius: 4px;
+            border-bottom: 1px solid rgb(108, 108, 108);
+            font-size: 20px;
+            font-weight: 500;
+            padding: 8px;
+        }
+
+        & .form-group {
+            margin: 24px 8px;
+        }
+
+        & .btn-submit {
+            display: flex;
+            justify-content: center;
+            margin: 12px 0;
+
+            & .btn {
+                width: 60%;
+                background-color: #909090;
+                border: none;
+            }
+        }
+    }
+
+}

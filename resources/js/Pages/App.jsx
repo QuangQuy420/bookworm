@@ -9,6 +9,7 @@ import About from './About';
 import Cart from './Cart';
 import Shop from './Shop';
 import NotFound from './NotFound';
+import Product from './Product';
 
 const router = createHashRouter([
     {
@@ -24,6 +25,14 @@ const router = createHashRouter([
         element: (
             <DefaultLayout>
                <Shop/>
+            </DefaultLayout>
+        )
+    },
+    {
+        path: '/shop/detail',
+        element: (
+            <DefaultLayout>
+               <Product/>
             </DefaultLayout>
         )
     },

@@ -1,0 +1,20 @@
+.detail {
+    border: 1px solid rgb(108, 108, 108);
+    padding: 0;
+    border-radius: 4px;
+
+    &__img {
+        width: 100%;
+        border-radius: 4px;
+    }
+
+    &__author {
+        display: flex;
+        justify-content: center;
+        margin: 12px 0;
+    }
+
+    &__content {
+        margin: 20px 0;
+    }
+}
