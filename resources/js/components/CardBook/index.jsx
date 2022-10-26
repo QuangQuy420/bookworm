@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText, CardFooter } from "reactstrap";
+import { setBookID } from "../../Actions/bookActions";
 
 import "./style.scss";
 
 function CardBook(props) {
+    const dispatch = useDispatch()
     const { detailBook } = props;
     const {
+        id,
         book_title,
         author_name,
         book_cover_photo,
@@ -17,8 +22,19 @@ function CardBook(props) {
         book_cover_photo ? book_cover_photo : "book5"
     }.jpg`;
 
+    let navigate = useNavigate()
+
+    const handleGetDetail = (bookId) => {
+        dispatch(setBookID(bookId));
+        let path = `/shop/product`; 
+        navigate(path);
+    }
+
     return (
-        <Card className="m-2 mt-4 mb-4">
+        <Card 
+            className="m-2 mt-4 mb-4"
+            onClick={() => handleGetDetail(id)}
+        >
             <img className="card__image" alt="Sample" src={urlImg} />
             <CardBody>
                 <CardTitle tag="h5">{book_title}</CardTitle>

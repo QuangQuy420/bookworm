@@ -1,34 +1,29 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { handlePaginate } from "../../Actions/bookActions";
+import React from "react";;
 
 import "./style.scss";
 
 function Pagination(props) {
-    const pagination = useSelector((state) => state.book.pagination);
-    const dispatch = useDispatch()
+    const { pagination, onPaginate } = props
     const { current_page, last_page } = pagination;
 
-    const handlePrevPage = () => {
-        dispatch(handlePaginate(current_page - 1))
-    };
-
-    const handleNextPage = () => {
-        dispatch(handlePaginate(current_page + 1))
+    const handleSetPaginate = (page) => {
+        if (onPaginate) {
+            onPaginate(page)
+        }
     };
 
     return (
         <div className="pagination">
             <button
                 disabled={current_page == 1 ? true : false}
-                onClick={handlePrevPage}
+                onClick={() => handleSetPaginate(current_page - 1)}
             >
                 Prev
             </button>
             <button>{current_page}</button>
             <button
                 disabled={current_page == last_page ? true : false}
-                onClick={handleNextPage}
+                onClick={() => handleSetPaginate(current_page + 1)}
             >
                 Next
             </button>

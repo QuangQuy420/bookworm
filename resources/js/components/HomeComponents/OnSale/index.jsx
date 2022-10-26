@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Carousel, CarouselItem, CarouselControl } from "reactstrap";
-import { Button } from "react-bootstrap";
 
 import CardBook from "../../CardBook";
 import "./style.scss";
@@ -8,6 +8,7 @@ import "./style.scss";
 function OnSale(props) {
     const { saleBooks } = props;
     const [index, setIndex] = useState(0);
+    let navigate = useNavigate();
 
     const displayBook = [
         saleBooks.slice(0, 4),
@@ -34,11 +35,20 @@ function OnSale(props) {
         );
     });
 
+    const handleToPage = () => {
+        let path = `/shop`; 
+        navigate(path);
+    }
+
     return (
         <div className="container__onsale">
             <div className="container__onsale-title">
                 <h4>On Sale</h4>
-                <Button color="primary">View All &gt;</Button>
+                <button 
+                    className="container__onsale-btn"
+                    onClick={handleToPage}
+                >View All &gt;
+                </button>
             </div>
             <Carousel next={next} previous={previous} dark interval={false}>
                 {slides}

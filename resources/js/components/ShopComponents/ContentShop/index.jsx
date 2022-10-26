@@ -44,6 +44,10 @@ function ContentShop(props) {
         dispatch(handlePaginate(1))
     }
 
+    const handleSetPaginate = (page) => {
+        dispatch(handlePaginate(page))
+    }
+
     return (
         <div className='shop__content row'>
             <div className="col-2">
@@ -66,7 +70,10 @@ function ContentShop(props) {
                     <DisplayBook />
                 </div>
                 <div>
-                    <Pagination />
+                    <Pagination 
+                        pagination={pagination} 
+                        onPaginate = {handleSetPaginate}
+                    />
                 </div>
             </div>
         </div>

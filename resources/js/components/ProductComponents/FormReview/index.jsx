@@ -24,11 +24,11 @@ function FormReview(props) {
                     <FormGroup>
                         <Label for="exampleSelect">Select</Label>
                         <Input id="exampleSelect" name="select" type="select">
-                            <option>5</option>
-                            <option>4</option>
-                            <option>3</option>
-                            <option>2</option>
-                            <option>1</option>
+                            <option>5 Star</option>
+                            <option>4 Star</option>
+                            <option>3 Star</option>
+                            <option>2 Star</option>
+                            <option>1 Star</option>
                         </Input>
                     </FormGroup>
                     <div className="btn-submit">

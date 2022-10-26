@@ -6,7 +6,7 @@ import './style.scss'
 
 function Header(props) {
     const headerElement = ['Home', 'Shop', 'About', 'Cart', 'SignIn'];
-    const linkElement = ['/', '/shop', '/about', '/cart', '/sign-in'];
+    const linkElement = ['/home', '/shop', '/about', '/cart', '/sign-in'];
     const [active, setActive] = useState(false);
     const currentIndex = useRef(0)
 
@@ -24,7 +24,7 @@ function Header(props) {
     return (
         <div className='header'>
             <Navbar>
-                <NavbarBrand href="/">
+                <NavbarBrand href="/#/home">
                     <div>
                         <img
                             alt="book"

@@ -3,9 +3,18 @@ const initState = {
     pagination: [],
     listCategoryName: [],
     listAuthorName: [],
+    detailBook: {
+        book: {},
+        rating: {},
+        reviews: [],
+        meta: {},
+        total: [],
+    },
     filter: {
-        limit: "12",
+        bookId: 5,
+        limit: "",
         sort: "on-sale",
+        sort_review: "DESC",
         link: "/get-sale-books",
         author: "",
         category: "",
@@ -48,6 +57,14 @@ const bookReducer = (state = initState, action) => {
                     link: action.payload.link,
                 },
             };
+        case "SET_FILTER_SORT_REVIEW":
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    sort_review: action.payload,
+                },
+            };
         case "FILTER_BY_AUTHOR":
             return {
                 ...state,
@@ -83,6 +100,26 @@ const bookReducer = (state = initState, action) => {
                 filter: {
                     ...state.filter,
                     page: action.payload,
+                },
+            };
+        case "GET_DETAIL_BOOK":
+            return {
+                ...state,
+                detailBook: {
+                    ...state.detailBook,
+                    book: action.payload.book,
+                    rating: action.payload.rating,
+                    reviews: action.payload.reviews,
+                    meta: action.payload.meta,
+                    total: action.payload.total,
+                },
+            };
+        case "SET_BOOK_ID":
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    bookId: action.payload,
                 },
             };
         default:

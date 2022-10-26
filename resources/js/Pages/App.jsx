@@ -13,7 +13,7 @@ import Product from './Product';
 
 const router = createHashRouter([
     {
-        path: '/',
+        path: '/home',
         element: (
             <DefaultLayout>
                <Home/>
@@ -29,7 +29,7 @@ const router = createHashRouter([
         )
     },
     {
-        path: '/shop/detail',
+        path: '/shop/product',
         element: (
             <DefaultLayout>
                <Product/>
