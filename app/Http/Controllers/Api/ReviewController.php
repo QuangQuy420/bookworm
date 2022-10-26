@@ -55,9 +55,9 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        return $this->reviewRepository->getDetailReview($id);
+        return $this->reviewRepository->getDetailReview($id, $request);
     }
 
     /**

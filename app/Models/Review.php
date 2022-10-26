@@ -43,4 +43,9 @@ class Review extends Model
             ->groupBy('review.rating_start')
             ->havingRaw('review.rating_start = ?', [$star]);
     }
+
+    public function scopeSortDate($query, $sort) {
+        return $query   
+            ->orderBy('review.review_date', $sort ? $sort : 'DESC');
+    }
 }

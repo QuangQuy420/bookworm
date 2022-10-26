@@ -7,9 +7,9 @@ use App\Http\Resources\ReviewCollection;
 use App\Http\Resources\BookResource;
 
 class BookRepository {
-
     protected $limit;
     protected $sort;
+    
     public function filterBook($request) {
         $query = Book::getListBooks();
         if($this->limit = $request->input('limit')){}
