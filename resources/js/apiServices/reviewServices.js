@@ -8,3 +8,12 @@ export const getListReviews = async (endpoint, options) => {
         console.log(error);
     }
 };
+
+export const postReview = async (endpoint, data) => {
+    try {
+        const res = await request.post(endpoint, data);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+};

@@ -4,6 +4,8 @@
     }
 
     &__add {
+        display: flex;
+        flex-direction: column;
         border: 1px solid rgb(108, 108, 108);
         border-radius: 4px;
 
@@ -15,22 +17,36 @@
             font-weight: 500;
             padding: 8px;
         }
+    }
 
-        & .form-group {
-            margin: 24px 8px;
+    &__form-group {
+        display: flex;
+        flex-direction: column;
+        margin: 12px 12px 24px;
+
+        & label {
+            margin-bottom: 4px;
         }
 
-        & .btn-submit {
-            display: flex;
-            justify-content: center;
-            margin: 12px 0;
-
-            & .btn {
-                width: 60%;
-                background-color: #909090;
-                border: none;
-            }
+        & .required-message {
+            color: red;
         }
     }
 
+    &__submit-form {
+        margin: 8px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        & span {
+            margin-top: 12px;
+            font-size: 18px;
+        }
+    }
+
+    &__success-message {
+        color: green;
+    }
 }

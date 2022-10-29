@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.8.6",
+        "react-hook-form": "^7.38.0",
         "react-router-dom": "^6.4.2",
         "reactstrap": "^9.1.4",
         "redux": "^4.2.0",

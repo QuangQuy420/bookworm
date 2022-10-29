@@ -2,6 +2,9 @@ import React from 'react';
 import './style.scss'
 
 function Order(props) {
+
+    
+
     return (
         <div className='order col-4'>
             <div className="order__add">

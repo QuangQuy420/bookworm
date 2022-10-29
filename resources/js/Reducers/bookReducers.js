@@ -11,7 +11,7 @@ const initState = {
         total: [],
     },
     filter: {
-        bookId: 5,
+        bookId: "5",
         limit: "",
         sort: "on-sale",
         sort_review: "DESC",

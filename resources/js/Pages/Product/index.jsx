@@ -37,9 +37,7 @@ function Product(props) {
                 },
             };
             const result = await reviewServices.getListReviews(
-                `/get-detail-reviews/${
-                    filterReview.bookId ? filterReview.bookId : 4
-                }`,
+                `/get-detail-reviews/${filterReview.bookId}`,
                 filter
             );
             for (let i = 1; i <= 5; i++) {
