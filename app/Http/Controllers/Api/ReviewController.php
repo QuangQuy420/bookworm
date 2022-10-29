@@ -13,11 +13,7 @@ class ReviewController extends Controller
     public function __construct(ReviewRepository $reviewRepository) {
         $this->reviewRepository = $reviewRepository;
     }
-
-    public function getDetailReview() {
-        
-    }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +42,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->reviewRepository->postReviewBook($request);
     }
 
     /**

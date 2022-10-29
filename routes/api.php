@@ -32,4 +32,5 @@ Route::get('/get-category-name', [CategoryController::class, 'getCategoryName'])
 Route::get('/get-author-name', [AuthorController::class, 'getAuthorName']);
 
 Route::resource('/get-detail-reviews', ReviewController::class)->only(['show']);
+Route::post('/post-review', [ReviewController::class, 'store']);
 

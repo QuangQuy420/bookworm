@@ -19,7 +19,7 @@ class Review extends Model
         'review_title',
         'review_details',
         'review_date',
-        'review_start'
+        'rating_start'
     ];
 
     public function book() {
