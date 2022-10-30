@@ -18,6 +18,7 @@ import "./style.scss";
 function Product(props) {
     const dispatch = useDispatch();
     const filterReview = useSelector((state) => state.book.filter);
+    const bookId = JSON.parse(localStorage.getItem("book_id"))
 
     useEffect(() => {
         dispatch(setFilterShow(4));
@@ -37,7 +38,7 @@ function Product(props) {
                 },
             };
             const result = await reviewServices.getListReviews(
-                `/get-detail-reviews/${filterReview.bookId}`,
+                `/get-detail-reviews/${bookId}`,
                 filter
             );
             for (let i = 1; i <= 5; i++) {

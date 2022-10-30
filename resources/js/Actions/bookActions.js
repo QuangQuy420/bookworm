@@ -8,7 +8,6 @@ import {
     GET_DISPLAY_BOOK,
     GET_PAGINATION,
     HANDLE_PAGINATE,
-    SET_BOOK_ID,
     SET_FILTER_SHOW,
     SET_FILTER_SHOW_REVIEW,
     SET_FILTER_SORT,
@@ -101,10 +100,3 @@ export const setFilterSortReview = (data) => {
 };
 
 // REDIRECT PAGE
-
-export const setBookID = (data) => {
-    return {
-        type: SET_BOOK_ID,
-        payload: data,
-    };
-};

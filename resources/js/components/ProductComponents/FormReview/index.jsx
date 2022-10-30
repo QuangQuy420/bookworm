@@ -5,7 +5,8 @@ import * as reviewServices from "../../../apiServices/reviewServices";
 import "./style.scss";
 
 function FormReview(props) {
-    const bookId = useSelector((state) => state.book.filter.bookId);
+    const bookId = JSON.parse(localStorage.getItem("book_id"))
+
     const {
         register,
         handleSubmit,

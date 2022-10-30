@@ -10900,8 +10900,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getPagination": () => (/* binding */ getPagination),
 /* harmony export */   "handlePaginate": () => (/* binding */ handlePaginate),
 /* harmony export */   "getDetailBook": () => (/* binding */ getDetailBook),
-/* harmony export */   "setFilterSortReview": () => (/* binding */ setFilterSortReview),
-/* harmony export */   "setBookID": () => (/* binding */ setBookID)
+/* harmony export */   "setFilterSortReview": () => (/* binding */ setFilterSortReview)
 /* harmony export */ });
 /* harmony import */ var _Constants_bookConstants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Constants/bookConstants */ "./resources/js/Constants/bookConstants.js");
 
@@ -10979,13 +10978,6 @@ var setFilterSortReview = function setFilterSortReview(data) {
   };
 }; // REDIRECT PAGE
 
-var setBookID = function setBookID(data) {
-  return {
-    type: _Constants_bookConstants__WEBPACK_IMPORTED_MODULE_0__.SET_BOOK_ID,
-    payload: data
-  };
-};
-
 /***/ }),
 
 /***/ "./resources/js/Constants/bookConstants.js":
@@ -11009,8 +11001,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "HANDLE_PAGINATE": () => (/* binding */ HANDLE_PAGINATE),
 /* harmony export */   "GET_DETAIL_BOOK": () => (/* binding */ GET_DETAIL_BOOK),
 /* harmony export */   "SET_FILTER_SHOW_REVIEW": () => (/* binding */ SET_FILTER_SHOW_REVIEW),
-/* harmony export */   "SET_FILTER_SORT_REVIEW": () => (/* binding */ SET_FILTER_SORT_REVIEW),
-/* harmony export */   "SET_BOOK_ID": () => (/* binding */ SET_BOOK_ID)
+/* harmony export */   "SET_FILTER_SORT_REVIEW": () => (/* binding */ SET_FILTER_SORT_REVIEW)
 /* harmony export */ });
 // Shop Page
 var GET_CATEGORY_NAME = "GET_CATEGORY_NAME";
@@ -11029,8 +11020,6 @@ var HANDLE_PAGINATE = "HANDLE_PAGINATE"; // Product Page
 var GET_DETAIL_BOOK = "GET_DETAIL_BOOK";
 var SET_FILTER_SHOW_REVIEW = "SET_FILTER_SHOW_REVIEW";
 var SET_FILTER_SORT_REVIEW = "SET_FILTER_SORT_REVIEW"; // REDIRECT PAGE
-
-var SET_BOOK_ID = "SET_BOOK_ID";
 
 /***/ }),
 
@@ -11376,6 +11365,7 @@ function Product(props) {
   var filterReview = (0,react_redux__WEBPACK_IMPORTED_MODULE_7__.useSelector)(function (state) {
     return state.book.filter;
   });
+  var bookId = JSON.parse(localStorage.getItem("book_id"));
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_8__.setFilterShow)(4));
     dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_8__.filterByRating)(""));
@@ -11399,7 +11389,7 @@ function Product(props) {
                   }
                 };
                 _context.next = 4;
-                return _apiServices_reviewServices__WEBPACK_IMPORTED_MODULE_6__.getListReviews("/get-detail-reviews/".concat(filterReview.bookId), filter);
+                return _apiServices_reviewServices__WEBPACK_IMPORTED_MODULE_6__.getListReviews("/get-detail-reviews/".concat(bookId), filter);
 
               case 4:
                 result = _context.sent;
@@ -11673,7 +11663,6 @@ var initState = {
     total: []
   },
   filter: {
-    bookId: "5",
     limit: "",
     sort: "on-sale",
     sort_review: "DESC",
@@ -11768,13 +11757,6 @@ var bookReducer = function bookReducer() {
           reviews: action.payload.reviews,
           meta: action.payload.meta,
           total: action.payload.total
-        })
-      });
-
-    case "SET_BOOK_ID":
-      return _objectSpread(_objectSpread({}, state), {}, {
-        filter: _objectSpread(_objectSpread({}, state.filter), {}, {
-          bookId: action.payload
         })
       });
 
@@ -12021,12 +12003,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
-/* harmony import */ var _Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Actions/bookActions */ "./resources/js/Actions/bookActions.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/CardBook/style.scss");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/CardBook/style.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -12045,35 +12025,35 @@ function CardBook(props) {
       book_price = detailBook.book_price,
       final_price = detailBook.final_price;
   var urlImg = "images/".concat(book_cover_photo ? book_cover_photo : "book5", ".jpg");
-  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useNavigate)();
 
   var handleGetDetail = function handleGetDetail(bookId) {
-    dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.setBookID)(bookId));
+    localStorage.setItem("book_id", JSON.stringify(bookId));
     var path = "/shop/product";
     navigate(path);
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Card, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.Card, {
     className: "m-2 mt-4 mb-4",
     onClick: function onClick() {
       return handleGetDetail(id);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
       className: "card__image",
       alt: "Sample",
       src: urlImg
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.CardBody, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.CardTitle, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.CardBody, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.CardTitle, {
         tag: "h5",
         children: book_title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.CardText, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.CardText, {
         children: author_name
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.CardFooter, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.CardFooter, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
         className: "book-price",
         children: book_price == final_price ? "" : book_price
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
         className: "last-price",
         children: "$" + final_price
       })]
@@ -12641,9 +12621,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function FormReview(props) {
-  var bookId = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
-    return state.book.filter.bookId;
-  });
+  var bookId = JSON.parse(localStorage.getItem("book_id"));
 
   var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_6__.useForm)(),
       register = _useForm.register,
@@ -12954,42 +12932,138 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/ProductComponents/Order/style.scss");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/ProductComponents/Order/style.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
 
 
 function Order(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+  var detailBook = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.book.detailBook.book;
+  });
+  var id = detailBook.id,
+      discount_price = detailBook.discount_price,
+      final_price = detailBook.final_price,
+      book_price = detailBook.book_price;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
+      _useState2 = _slicedToArray(_useState, 2),
+      quantity = _useState2[0],
+      setQuantity = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      quantityAvailable = _useState4[0],
+      setQuantityAvailable = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : []),
+      _useState6 = _slicedToArray(_useState5, 2),
+      tempCart = _useState6[0],
+      setTempCart = _useState6[1];
+
+  var bookId = JSON.parse(localStorage.getItem("book_id"));
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    for (var i = 0; i < tempCart.length; i++) {
+      if (tempCart[i].book_id == bookId && tempCart[i].quantity >= 8) {
+        console.log(1);
+        setQuantityAvailable(tempCart[i].quantity);
+        setQuantity(0);
+        break;
+      } else if (tempCart[i].book_id == bookId) {
+        console.log(2);
+        setQuantityAvailable(tempCart[i].quantity);
+        setQuantity(1);
+        break;
+      } else {
+        console.log(3);
+        setQuantityAvailable(0);
+        setQuantity(1);
+      }
+    }
+  }, [tempCart]);
+
+  var handleAddCart = function handleAddCart() {
+    var obj = {
+      book_id: id,
+      quantity: quantity
+    };
+
+    if (tempCart.length == 0) {
+      setTempCart([obj]);
+    }
+
+    var cartItem = tempCart.forEach(function (item) {
+      if (item.book_id == id) {
+        item.quantity = item.quantity + quantity;
+        setTempCart(_toConsumableArray(tempCart));
+      } else {
+        setTempCart([].concat(_toConsumableArray(tempCart), [obj]));
+      }
+    });
+  };
+
+  localStorage.setItem("cart", JSON.stringify(tempCart));
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "order col-4",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "order__add",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "order__price",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-          children: "$33"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
-          children: "$20"
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          children: discount_price ? "$ " + book_price : ""
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
+          children: "$ " + final_price
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "order__handle",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
           children: "Quantity"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "order__quantity",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             className: "order__decrease",
+            disabled: quantity <= 1 ? true : false,
+            onClick: function onClick() {
+              return setQuantity(quantity - 1);
+            },
             children: "-"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            children: "5"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            children: quantity
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             className: "order__increase",
+            disabled: quantity >= 8 - quantityAvailable || quantityAvailable >= 8 ? true : false,
+            onClick: function onClick() {
+              return setQuantity(quantity + 1);
+            },
             children: "+"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
           className: "order__buy",
+          onClick: handleAddCart,
           children: "Add to Cart"
         })]
       })]
@@ -14270,7 +14344,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".order {\n  padding: 0 0 0 24px;\n}\n.order__add {\n  border: 1px solid #6c6c6c;\n  border-radius: 4px;\n}\n.order__price {\n  background-color: #dddddd;\n  border-radius: 4px;\n  border-bottom: 1px solid #6c6c6c;\n  display: flex;\n  padding: 6px;\n  align-items: center;\n}\n.order__price span {\n  margin-right: 6px;\n  font-size: 20px;\n}\n.order__price h5 {\n  margin: 0;\n  font-size: 28px;\n}\n.order__handle {\n  margin: 32px;\n}\n.order__quantity {\n  background-color: #dddddd;\n  display: flex;\n  justify-content: space-between;\n  font-size: 24px;\n  padding: 0 4px;\n  margin: 8px 0;\n}\n.order__increase, .order__decrease {\n  border: none;\n  background-color: #dddddd;\n}\n.order__buy {\n  margin-top: 36px;\n  font-size: 22px;\n  font-weight: 400;\n  border: none;\n  background-color: #dddddd;\n  width: 100%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".order {\n  padding: 0 0 0 24px;\n}\n.order__add {\n  border: 1px solid #6c6c6c;\n  border-radius: 4px;\n}\n.order__price {\n  background-color: #dddddd;\n  border-radius: 4px;\n  border-bottom: 1px solid #6c6c6c;\n  display: flex;\n  padding: 6px;\n  align-items: center;\n}\n.order__price span {\n  margin-right: 6px;\n  font-size: 20px;\n  text-decoration: line-through;\n}\n.order__price h5 {\n  margin: 0;\n  font-size: 28px;\n}\n.order__handle {\n  margin: 32px;\n}\n.order__quantity {\n  background-color: #dddddd;\n  display: flex;\n  justify-content: space-between;\n  font-size: 24px;\n  margin: 8px 0;\n}\n.order__increase, .order__decrease {\n  border: none;\n  background-color: #c7c7c7;\n  min-width: 40px;\n}\n.order__buy {\n  margin-top: 36px;\n  font-size: 22px;\n  font-weight: 400;\n  border: none;\n  background-color: #dddddd;\n  width: 100%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

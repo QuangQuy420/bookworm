@@ -11,7 +11,6 @@ const initState = {
         total: [],
     },
     filter: {
-        bookId: "5",
         limit: "",
         sort: "on-sale",
         sort_review: "DESC",
@@ -112,14 +111,6 @@ const bookReducer = (state = initState, action) => {
                     reviews: action.payload.reviews,
                     meta: action.payload.meta,
                     total: action.payload.total,
-                },
-            };
-        case "SET_BOOK_ID":
-            return {
-                ...state,
-                filter: {
-                    ...state.filter,
-                    bookId: action.payload,
                 },
             };
         default:

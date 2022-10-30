@@ -17,6 +17,7 @@
         & span {
             margin-right: 6px;
             font-size: 20px;
+            text-decoration: line-through;
         }
 
         & h5 {
@@ -34,14 +35,14 @@
         display: flex;
         justify-content: space-between;
         font-size: 24px;
-        padding: 0 4px;
         margin: 8px 0;
     }
 
     &__increase,
     &__decrease {
         border: none;
-        background-color: rgb(221, 221, 221);
+        background-color: rgb(199, 199, 199);
+        min-width: 40px;
     }
 
     &__buy {
