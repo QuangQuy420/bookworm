@@ -1,0 +1,134 @@
+.cart {
+
+    &__list {
+        font-weight: 500;
+    }
+
+    &__title {
+        border-bottom: 1px solid #333;
+        padding-bottom: 24px;
+    }
+
+    & .container {
+        margin: 24px 0 0 0;
+    }
+
+    &__book {
+        border-top: 1px solid #333;
+        border-left: 1px solid #333;
+        border-right: 1px solid #333;
+        border-radius: 4px;
+    }
+
+    &__details {
+        border-bottom: 1px solid #333;
+
+        &-container {
+            display: flex;
+            margin: 12px 0;
+
+            & div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-left: 12px;
+            }
+        }
+
+        &-img {
+            width: 150px;
+        }
+
+        &-title {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        &-price {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            & span {
+                text-align: center;
+                text-decoration: line-through;
+            }
+
+            & p {
+                text-align: center;
+                margin: 0;
+                font-weight: 500;
+                font-size: 20px;
+            }
+
+        }
+    }
+
+    &__price {
+
+        &-total {
+            display: flex;
+            font-weight: 500;
+            font-size: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &__quantity {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-decrease,
+        &-increase {
+            border: none;
+            background-color: rgb(200, 200, 200);
+        }
+
+        & span {
+            padding: 0 12px;
+        }
+    }
+
+    &__payment {
+        padding: 0 0 0 24px;
+
+        &-container {
+            border: 1px solid #333;
+            border-radius: 4px;
+        }
+
+        &-title {
+            font-weight: 500;
+        }
+
+        &-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            & h5 {
+                font-size: 30px;
+                margin: 24px 0;
+            }
+
+            & button {
+                margin-bottom: 24px;
+                min-width: 240px;
+                border: none;
+                background-color: rgb(200, 200, 200);
+                padding: 6px 0;
+                border-radius: 4px;
+            }
+        }
+    }
+
+    &__list,
+    &__payment-title {
+        border-bottom: 1px solid #333;
+        border-radius: 4px;
+        padding: 8px 0;
+        text-align: center;
+    }
+}

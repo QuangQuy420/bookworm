@@ -9,7 +9,7 @@ import "./style.scss";
 function FilterShop(props) {
     const nameAuthor = useSelector((state) => state.book.listAuthorName);
     const nameCategory = useSelector((state) => state.book.listCategoryName);
-    const starRating = [0, 1, 2, 3, 4, 5]
+    const starRating = [1, 2, 3, 4, 5]
 
     return (
         <>

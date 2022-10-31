@@ -24,7 +24,7 @@ function CardBook(props) {
     let navigate = useNavigate()
 
     const handleGetDetail = (bookId) => {
-        localStorage.setItem("book_id", JSON.stringify(bookId));
+        localStorage.setItem("book_id",JSON.stringify(bookId)); 
         let path = `/shop/product`; 
         navigate(path);
     }

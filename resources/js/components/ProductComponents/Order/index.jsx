@@ -1,10 +1,12 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCartQuantity } from "../../../Actions/bookActions";
 import "./style.scss";
 
 function Order(props) {
     const detailBook = useSelector((state) => state.book.detailBook.book);
-    const { id, discount_price, final_price, book_price } = detailBook;
+    const { id, discount_price, final_price, book_price, book_cover_photo, book_title, author_name } = detailBook;
+    const dispatch = useDispatch()
     const [quantity, setQuantity] = useState(1);
     const [quantityAvailable, setQuantityAvailable] = useState(0)
     const [tempCart, setTempCart] = useState(
@@ -17,17 +19,14 @@ function Order(props) {
     useEffect(() => {
         for (let i = 0; i < tempCart.length; i++) {
             if(tempCart[i].book_id == bookId && tempCart[i].quantity >= 8) {
-                console.log(1)
                 setQuantityAvailable(tempCart[i].quantity)
                 setQuantity(0)
                 break;
             } else if (tempCart[i].book_id == bookId) {
-                console.log(2)
                 setQuantityAvailable(tempCart[i].quantity)
                 setQuantity(1)
                 break;
             } else {
-                console.log(3)
                 setQuantityAvailable(0)
                 setQuantity(1)
             }
@@ -38,6 +37,12 @@ function Order(props) {
         const obj = {
             book_id: id,
             quantity: quantity,
+            book_cover_photo: book_cover_photo,
+            book_price: book_price,
+            discount_price: discount_price,
+            final_price: final_price,
+            book_title: book_title,
+            author_name: author_name
         };
 
         if (tempCart.length == 0) {
@@ -52,7 +57,10 @@ function Order(props) {
             }
         });
     };
-    localStorage.setItem("cart", JSON.stringify(tempCart));
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(tempCart));
+        dispatch(setCartQuantity(tempCart.length))
+    }, [tempCart])
 
     return (
         <div className="order col-4">

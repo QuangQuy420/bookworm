@@ -1,12 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, NavbarBrand, NavItem } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss'
+import { useSelector } from 'react-redux';
 
 function Header(props) {
     const headerElement = ['Home', 'Shop', 'About', 'Cart', 'SignIn'];
     const linkElement = ['/home', '/shop', '/about', '/cart', '/sign-in'];
+    const quantityCart = useSelector(state => state.book.totalCart)
     const [active, setActive] = useState(false);
     const currentIndex = useRef(0)
 
@@ -52,6 +54,7 @@ function Header(props) {
                                     onClick={() => handleActive(index)}
                                 >
                                     {element}
+                                    {index == 3 && <span> ({quantityCart})</span>}
                                 </Link>
                             </NavItem>
                         )

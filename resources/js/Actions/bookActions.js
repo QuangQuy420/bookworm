@@ -9,7 +9,7 @@ import {
     GET_PAGINATION,
     HANDLE_PAGINATE,
     SET_FILTER_SHOW,
-    SET_FILTER_SHOW_REVIEW,
+    SET_CART_QUANTITY,
     SET_FILTER_SORT,
     SET_FILTER_SORT_REVIEW,
 } from "../Constants/bookConstants";
@@ -99,4 +99,11 @@ export const setFilterSortReview = (data) => {
     };
 };
 
-// REDIRECT PAGE
+// CART
+
+export const setCartQuantity = (data) => {
+    return {
+        type: SET_CART_QUANTITY,
+        payload: data,
+    };
+};

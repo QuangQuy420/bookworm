@@ -20,6 +20,7 @@ const initState = {
         star: "",
         page: "1",
     },
+    totalCart: 0,
 };
 
 const bookReducer = (state = initState, action) => {
@@ -112,6 +113,11 @@ const bookReducer = (state = initState, action) => {
                     meta: action.payload.meta,
                     total: action.payload.total,
                 },
+            };
+        case "SET_CART_QUANTITY":
+            return {
+                ...state,
+                totalCart: action.payload,
             };
         default:
             return state;

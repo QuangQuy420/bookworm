@@ -1,0 +1,38 @@
+.about {
+
+    margin-bottom: 150px;
+    
+    & .container {
+        margin: 0 auto;
+    }
+
+    &__title {
+        border-bottom: 1px solid #333;
+        padding-bottom: 12px;
+    }
+
+    &__content {
+        max-width: 900px;
+    }
+
+    &__description {
+        &-title {
+            display: flex;
+            justify-content: center;
+            margin: 24px 0 36px 0;
+        }
+
+        margin-bottom: 24px;
+    }
+
+    &__history {
+        & h4 {
+            margin-bottom: 12px;
+        }
+
+        & span {
+            display: flex;
+            margin-bottom: 12px;
+        }
+    }
+}
