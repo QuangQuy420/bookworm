@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCartQuantity } from "../../Actions/bookActions";
 import CartBook from "../../components/CartComponents/CartBook";
 import Payment from "../../components/CartComponents/Payment";
 import "./style.scss";
@@ -6,6 +8,7 @@ import "./style.scss";
 function Cart(props) {
     const carts = JSON.parse(localStorage.getItem("cart")) || [];
     const [render, setRender] = useState(true)
+    const dispatch = useDispatch()
 
     const handleCountTotal = (quantity, id) => {
         for (let i = 0; i < carts.length; i++) {
@@ -13,6 +16,7 @@ function Cart(props) {
                 if(quantity == 0) {
                     carts.splice(i, 1);
                     localStorage.setItem("cart", JSON.stringify(carts));
+                    dispatch(setCartQuantity(carts.length))
                     setRender(!render)
                     break;
                 }

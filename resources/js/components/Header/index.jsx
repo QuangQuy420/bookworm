@@ -4,15 +4,20 @@ import { Navbar, NavbarBrand, NavItem } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss'
 import { useSelector } from 'react-redux';
+import LogIn from '../LogIn';
 
 function Header(props) {
     const headerElement = ['Home', 'Shop', 'About', 'Cart', 'SignIn'];
-    const linkElement = ['/home', '/shop', '/about', '/cart', '/sign-in'];
+    const linkElement = ['/home', '/shop', '/about', '/cart', ''];
     const quantityCart = useSelector(state => state.book.totalCart)
     const [active, setActive] = useState(false);
+    const [showLogIn, setShowLogIn] = useState(false)
     const currentIndex = useRef(0)
 
     const handleActive = (index) => {
+        if (index == 4) {
+            setShowLogIn(true)
+        }
         if (currentIndex.current != index) {
             setActive(true)
             currentIndex.current = index
@@ -23,7 +28,12 @@ function Header(props) {
         }
     };
 
+    const handleShow = (modal) => {
+        setShowLogIn(!modal);
+    }
+
     return (
+        <>
         <div className='header'>
             <Navbar>
                 <NavbarBrand href="/#/home">
@@ -62,6 +72,8 @@ function Header(props) {
                 </div>
             </Navbar>
         </div>
+        {showLogIn && <LogIn active={showLogIn} onShow={handleShow}/>}
+        </>
     );
 }
 

@@ -52,14 +52,14 @@ const router = createHashRouter([
             </DefaultLayout>
         )
     },
-    {
-        path: '/sign-in',
-        element: (
-            <DefaultLayout>
-               <SignIn/>
-            </DefaultLayout>
-        )
-    },
+    // {
+    //     path: '/sign-in',
+    //     element: (
+    //         <DefaultLayout>
+    //            <SignIn/>
+    //         </DefaultLayout>
+    //     )
+    // },
     {
         path: '*',
         element: (
