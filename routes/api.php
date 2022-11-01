@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AuthorController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ReviewController;
 
 
@@ -19,9 +20,11 @@ use App\Http\Controllers\Api\ReviewController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/get-sale-books', [BookController::class, 'getSaleBooks']);
 Route::get('/get-recommend-books', [BookController::class, 'getRecommendBooks']);
