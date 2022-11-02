@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use http\Env\Request;
 
 class AuthRepository{
@@ -47,9 +48,12 @@ class AuthRepository{
 
     public function logout()
     {
-        $user = request()->user();
-        dd($user);
-        // $user->tokens()->delete();
-        return response()->json(['message' => 'Logout Success ! '], 200);
+        auth()->user()->tokens()->delete();
+            return response()->json(
+            [
+                'message' => 'Logout Success ! '
+            ], 
+            200
+        );
     }
 }
