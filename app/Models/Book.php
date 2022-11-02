@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 use App\Models\Discount;
 use App\Models\Author;
@@ -67,10 +68,10 @@ class Book extends Model
     public function scopeGetSaleBooks($query) {
         return $query
             ->where([
-                ['discount.discount_start_date', '<=', now()->subDays()],
-                ['discount.discount_end_date', '>=', now()->subDays()]
+                ['discount.discount_start_date', '<=', Carbon::now('Asia/Ho_Chi_Minh')],
+                ['discount.discount_end_date', '>=', Carbon::now('Asia/Ho_Chi_Minh')]
             ])->orWhere([
-                ['discount.discount_start_date', '<=', now()->subDays()],
+                ['discount.discount_start_date', '<=', Carbon::now('Asia/Ho_Chi_Minh')],
                 ['discount.discount_end_date', NULL]
             ])
             ->orderByRaw('book.book_price - discount.discount_price DESC')
