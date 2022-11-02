@@ -10,7 +10,7 @@ const request = axios.create({
 
 const getToken = () => {
     try {
-        return localStorage.getItem("token");
+        return JSON.parse(localStorage.getItem("token"));
     } catch (error) {
         return "";
     }
@@ -18,6 +18,7 @@ const getToken = () => {
 
 export const get = async (endpoint, options = {}) => {
     const token = getToken();
+    console.log(token);
     const response = await request.get(endpoint, options, {
         headers: {
             Accept: "application/json",

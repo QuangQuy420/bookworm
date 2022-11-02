@@ -25,6 +25,8 @@
 .nav-item {
     font-size: 20px;
     margin-left: 60px;
+    display: flex;
+    align-items: center;
 
     a {
         text-decoration: none;
@@ -53,5 +55,16 @@
         &::before {
             width: 100%;
         }
+    }
+}
+
+.sign-in {
+    cursor: pointer;
+
+    & .btn {
+        background-color: #dadada;
+        border: none;
+        color: #333;
+        font-size: 20px;
     }
 }

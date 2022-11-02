@@ -12,6 +12,7 @@ import {
     SET_CART_QUANTITY,
     SET_FILTER_SORT,
     SET_FILTER_SORT_REVIEW,
+    SET_NAME_USER,
 } from "../Constants/bookConstants";
 
 export const getCategoryName = (data) => {
@@ -104,6 +105,15 @@ export const setFilterSortReview = (data) => {
 export const setCartQuantity = (data) => {
     return {
         type: SET_CART_QUANTITY,
+        payload: data,
+    };
+};
+
+// LOGIN
+
+export const setNameUser = (data) => {
+    return {
+        type: SET_NAME_USER,
         payload: data,
     };
 };

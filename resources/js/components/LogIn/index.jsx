@@ -1,21 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Modal, ModalBody, ModalHeader } from "reactstrap";
+import * as authServices from '../../apiServices/authServices';
+import { setNameUser } from "../../Actions/bookActions";
+
 import "./style.scss";
 
 function LogIn(props) {
-    const { active, onShow } = props;
+    const { active, onShow, onNameInfo } = props;
     const [modal, setModal] = useState(active);
-
+    // const [nameUser, setNameUser] = useState("")
     const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
     } = useForm();
+    const dispatch = useDispatch()
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const token = JSON.parse(localStorage.getItem("token"))
+
+    useEffect(() => {
+        if(token) {
+            setModal(false)
+        }
+    }, [])
+
+    const onSubmit = async (data) => {
+        const result = await authServices.logIn('/login', data);
+        localStorage.setItem("token", JSON.stringify(result.token));
+        localStorage.setItem("name_user", JSON.stringify(result.first_name + result.last_name));
+        dispatch(setNameUser(result.first_name + result.last_name))
+        setModal(!modal);
     };
 
     const toggle = () => {
@@ -30,13 +47,14 @@ function LogIn(props) {
                 <ModalBody>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="login__user">
-                            <label htmlFor="userName">User Name</label>
+                            <label htmlFor="email">User Name</label>
                             <input
-                                id="userName"
-                                {...register("userName", { required: true })}
+                            value={'quy'}
+                                id="email"
+                                {...register("email", { required: true })}
                                 type="text"
                             />
-                            {errors.userName && (
+                            {errors.email && (
                                 <span className="login-message">
                                     This field is required
                                 </span>
@@ -46,6 +64,8 @@ function LogIn(props) {
                         <div className="login__password">
                             <label htmlFor="password">Password</label>
                             <input
+                                value={'password'}
+
                                 id="password"
                                 {...register("password", { required: true })}
                                 type="password"

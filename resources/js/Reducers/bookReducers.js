@@ -21,6 +21,7 @@ const initState = {
         page: "1",
     },
     totalCart: 0,
+    nameUser: "",
 };
 
 const bookReducer = (state = initState, action) => {
@@ -118,6 +119,11 @@ const bookReducer = (state = initState, action) => {
             return {
                 ...state,
                 totalCart: action.payload,
+            };
+        case "SET_NAME_USER":
+            return {
+                ...state,
+                nameUser: action.payload,
             };
         default:
             return state;
