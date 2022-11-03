@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\OrderController;
 
 
 /*
@@ -22,6 +23,7 @@ use App\Http\Controllers\Api\ReviewController;
 
 Route::middleware('auth:sanctum')->group(function () {
     route::get('/logout', [AuthController::class, 'logout']);
+    route::post('/order', [OrderController::class, 'store']);
 }); 
 
 Route::post('/login', [AuthController::class, 'login']);
