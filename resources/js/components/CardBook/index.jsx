@@ -18,7 +18,7 @@ function CardBook(props) {
     } = detailBook;
 
     const urlImg = `images/${
-        book_cover_photo ? book_cover_photo : "book5"
+        book_cover_photo ? book_cover_photo : "default-image"
     }.jpg`;
 
     let navigate = useNavigate()

@@ -2,6 +2,7 @@
 export const GET_CATEGORY_NAME = "GET_CATEGORY_NAME";
 export const GET_AUTHOR_NAME = "GET_AUTHOR_NAME";
 export const GET_DISPLAY_BOOK = "GET_DISPLAY_BOOK";
+export const SET_DISPLAY_DEFAULT = "SET_DISPLAY_DEFAULT";
 
 // Filter
 export const SET_FILTER_SHOW = "SET_FILTER_SHOW";
@@ -21,6 +22,3 @@ export const SET_FILTER_SORT_REVIEW = "SET_FILTER_SORT_REVIEW";
 
 // Cart
 export const SET_CART_QUANTITY = "SET_CART_QUANTITY";
-
-// LOGIN
-export const SET_NAME_USER = "SET_NAME_USER";

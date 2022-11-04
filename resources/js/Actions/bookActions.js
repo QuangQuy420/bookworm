@@ -13,6 +13,7 @@ import {
     SET_FILTER_SORT,
     SET_FILTER_SORT_REVIEW,
     SET_NAME_USER,
+    SET_DISPLAY_DEFAULT,
 } from "../Constants/bookConstants";
 
 export const getCategoryName = (data) => {
@@ -32,6 +33,13 @@ export const getAuthorName = (data) => {
 export const getDisplayBook = (data) => {
     return {
         type: GET_DISPLAY_BOOK,
+        payload: data,
+    };
+};
+
+export const setDisplayDefault = (data) => {
+    return {
+        type: SET_DISPLAY_DEFAULT,
         payload: data,
     };
 };
@@ -105,15 +113,6 @@ export const setFilterSortReview = (data) => {
 export const setCartQuantity = (data) => {
     return {
         type: SET_CART_QUANTITY,
-        payload: data,
-    };
-};
-
-// LOGIN
-
-export const setNameUser = (data) => {
-    return {
-        type: SET_NAME_USER,
         payload: data,
     };
 };

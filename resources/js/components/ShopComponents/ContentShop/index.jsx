@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function ContentShop(props) {
     const dispatch = useDispatch()
     const pagination = useSelector(state => state.book.pagination)
-    const itemShow = [5, 10, 15, 20]
+    const itemShow = [5, 15, 20, 25]
     const itemSort = ['Sort by On Sale', 'Sort by Popular', 'Sort by price: low to high', 'Sort by price: high to low']
 
     const handleFilterShow = (value, index) => {
@@ -58,7 +58,7 @@ function ContentShop(props) {
                     <SortShow 
                         itemShow={itemShow}
                         itemSort={itemSort}
-                        defaultShow={'Show 12'}
+                        defaultShow={'Show 15'}
                         defaultSort={'Sort By On Sale'}
                         titleName={'books'}
                         onFilterShow={handleFilterShow}

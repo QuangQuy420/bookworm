@@ -41,6 +41,19 @@ const bookReducer = (state = initState, action) => {
                 ...state,
                 displayBook: action.payload,
             };
+        case "SET_DISPLAY_DEFAULT":
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    limit: action.payload.limit,
+                    page: action.payload.page.page,
+                    author: action.payload.author,
+                    category: action.payload.category,
+                    star: action.payload.star,
+                    link: action.payload.link,
+                },
+            };
         case "SET_FILTER_SHOW":
             return {
                 ...state,
@@ -119,11 +132,6 @@ const bookReducer = (state = initState, action) => {
             return {
                 ...state,
                 totalCart: action.payload,
-            };
-        case "SET_NAME_USER":
-            return {
-                ...state,
-                nameUser: action.payload,
             };
         default:
             return state;

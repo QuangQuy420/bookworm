@@ -6,7 +6,7 @@ function DetailBook(props) {
     const detailBook = useSelector(state => state.book.detailBook.book)
     const { book_cover_photo, author_name, book_title, book_summary } = detailBook
 
-    const urlBook = book_cover_photo ? `images/${book_cover_photo}.jpg` : 'images/book5.jpg'
+    const urlBook = book_cover_photo ? `images/${book_cover_photo}.jpg` : 'images/default-image.jpg'
 
     return (
         <div className='detail col-8'>

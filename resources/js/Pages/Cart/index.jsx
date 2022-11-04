@@ -7,7 +7,7 @@ import "./style.scss";
 
 function Cart(props) {
     const carts = JSON.parse(localStorage.getItem("cart")) || [];
-    const [render, setRender] = useState(true)
+    const [render, setRender] = useState(false)
     const dispatch = useDispatch()
 
     const handleCountTotal = (quantity, id) => {
@@ -29,9 +29,13 @@ function Cart(props) {
         }
     }
 
+    const handleOrder = () => {
+        setRender(!render)
+    }
+
     return (
         <div className="cart">
-            <h4 className="cart__title">Your cart: 3 items</h4>
+            <h4 className="cart__title">{'Your cart: '+ carts.length + ' items'}</h4>
             <div className="container cart__container">
                 <div className="row">
                     <div className="col-8 cart__book">
@@ -46,7 +50,7 @@ function Cart(props) {
                             onCountTotal={handleCountTotal}
                         />
                     </div>
-                    <Payment carts={carts}/>
+                    <Payment carts={carts} onOrder={handleOrder}/>
                 </div>
             </div>
         </div>

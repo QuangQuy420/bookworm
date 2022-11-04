@@ -16,7 +16,7 @@ function CartBook(props) {
             <div key={book.book_id} className="row cart__details">
                 <div className="cart__details-container col-6">
                     <img
-                        src={`images/${book.book_cover_photo}.jpg`}
+                        src={`images/${book.book_cover_photo ? book.book_cover_photo : 'default-image'}.jpg`}
                         className="cart__details-img"
                     ></img>
                     <div>

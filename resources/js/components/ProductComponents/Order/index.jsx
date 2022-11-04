@@ -66,7 +66,7 @@ function Order(props) {
         <div className="order col-4">
             <div className="order__add">
                 <div className="order__price">
-                    <span>{discount_price ? "$ " + book_price : ""}</span>
+                    <span>{discount_price == final_price ? "$ " + book_price : ""}</span>
                     <h5>{"$ " + final_price}</h5>
                 </div>
                 <div className="order__handle">

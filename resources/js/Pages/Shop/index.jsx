@@ -5,15 +5,11 @@ import TitleShop from "../../components/ShopComponents/TitleShop";
 import * as bookServices from "../../apiServices/bookServices";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    filterByAuthor,
-    filterByCategory,
-    filterByRating,
     getAuthorName,
     getCategoryName,
     getDisplayBook,
     getPagination,
-    handlePaginate,
-    setFilterShow,
+    setDisplayDefault,
 } from "../../Actions/bookActions";
 import "./style.scss";
 
@@ -22,11 +18,14 @@ function Shop(props) {
     const filters = useSelector((state) => state.book.filter);
 
     useEffect(() => {
-        dispatch(setFilterShow(12));
-        dispatch(handlePaginate(1));
-        dispatch(filterByRating(""));
-        dispatch(filterByCategory(""));
-        dispatch(filterByAuthor(""));
+        dispatch(setDisplayDefault({
+            limit: 15,
+            page: 1,
+            author: "",
+            category: "",
+            star: "",
+            link: '/get-sale-books'
+        }))
     }, []);
 
     useEffect(() => {

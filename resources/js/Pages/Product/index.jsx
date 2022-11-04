@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DetailBook from "../../components/ProductComponents/DetailBook";
 import Order from "../../components/ProductComponents/Order";
 import ListReview from "../../components/ProductComponents/ListReview";
@@ -18,7 +18,8 @@ import "./style.scss";
 function Product(props) {
     const dispatch = useDispatch();
     const filterReview = useSelector((state) => state.book.filter);
-    const bookId = JSON.parse(localStorage.getItem("book_id"))
+    const bookId = JSON.parse(localStorage.getItem("book_id"));
+    const [categoryName, setCategoryName] = useState('Category Name')
 
     useEffect(() => {
         dispatch(setFilterShow(4));
@@ -41,6 +42,8 @@ function Product(props) {
                 `/get-detail-reviews/${bookId}`,
                 filter
             );
+            setCategoryName(result.book.category_name);
+
             for (let i = 1; i <= 5; i++) {
                 let value = result.total[i][0]
                     ? Object.values(result.total[i][0])[0]
@@ -63,7 +66,7 @@ function Product(props) {
 
     return (
         <>
-            <h5 className="product__title">Category Name</h5>
+            <h5 className="product__title">{categoryName[0].toUpperCase() + categoryName.slice(1)}</h5>
             <div className="product__book row">
                 <DetailBook />
                 <Order />

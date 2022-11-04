@@ -7,7 +7,15 @@
     }
 
     &-title {
-        height: 120px;
+        height: 50px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    &-body {
+        margin-bottom: 40px;
     }
 }
 

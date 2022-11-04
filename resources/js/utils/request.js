@@ -18,7 +18,6 @@ const getToken = () => {
 
 export const get = async (endpoint, options = {}) => {
     const token = getToken();
-    console.log(token);
     const response = await request.get(endpoint, options, {
         headers: {
             Accept: "application/json",
@@ -30,6 +29,7 @@ export const get = async (endpoint, options = {}) => {
 
 export const post = async (endpoint, data = {}) => {
     const token = getToken();
+    console.log(token);
     const response = await request.post(endpoint, data, {
         headers: {
             Accept: "application/json",
