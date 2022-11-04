@@ -44,28 +44,6 @@ class ReviewRepository {
 
     public function postReviewBook($request) {
 
-        $messages = [
-            'book_id.required' => 'Required',
-            'review_title.required' => 'Required',
-            'rating_start.required' => 'Required',
-        ];
-
-        // Validator function has 3 params
-        $validate = Validator::make($request->all(), [
-            'book_id' => 'required',
-            'review_title' => 'required',
-            'rating_start' => 'required',
-        ], $messages);
-
-        if ($validate->fails()) {
-            return response()->json(
-                [
-                    'message' => $validate->errors()
-                ],
-                499
-            ); 
-        }
-
         Review::create([
             'book_id' => $request->book_id,
             'review_title' => $request->review_title,

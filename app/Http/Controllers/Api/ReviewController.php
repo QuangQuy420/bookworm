@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\ReviewRepository;
+use App\Http\Requests\ReviewPostRequest;
 
 class ReviewController extends Controller
 {
@@ -40,7 +41,7 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReviewPostRequest $request)
     {
         return $this->reviewRepository->postReviewBook($request);
     }

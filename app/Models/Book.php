@@ -57,12 +57,13 @@ class Book extends Model
                 'book.author_id',
                 'author.author_name',
                 'book.category_id',
+                'category.category_name',
                 'book.book_price',
                 'discount.discount_price',
                 'discount.discount_start_date',
                 'discount.discount_end_date'
             )
-            ->groupBy('book.id', 'author.id', 'discount.id');
+            ->groupBy('book.id', 'author.id', 'discount.id', 'category.id');
     }
 
     public function scopeGetSaleBooks($query) {

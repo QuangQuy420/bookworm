@@ -22,30 +22,7 @@ class OrderRepository {
                 $order_id = $order_id + 1;
             };
 
-            $messages = [
-                'book_id.required' => 'Required',
-                'book_id.exists' => 'No Exist Book',
-                'quantity.required' => 'Required',
-                'price.required'=> 'Required'
-            ];
-
-            foreach($request->listOrder as $item) { 
-                // Validator function has 3 params
-                $validate = Validator::make($item, [
-                    'book_id' => 'required|exists:book,id',
-                    'quantity' => 'required',
-                    'price' => 'required'
-                ], $messages);
-               
-                if ($validate->fails()) {
-                    return response()->json(
-                        [
-                            'message' => $validate->errors()
-                        ],
-                        422
-                    ); 
-                }
-
+            foreach($request->listOrder as $item) {
                 $order_amount += ($item['quantity'] * $item['price']);
             }
 
