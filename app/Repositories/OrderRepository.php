@@ -28,7 +28,7 @@ class OrderRepository {
 
             Order::Create([
                 'user_id'=> $request->user()->id,
-                'order_date'=> Carbon::now('Asia/Ho_Chi_Minh')->toDateString(),
+                'order_date'=> Carbon::now('Asia/Ho_Chi_Minh'),
                 'order_amount'=> $order_amount
             ]);
 

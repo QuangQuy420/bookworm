@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Http\Resources\ReviewCollection;
 use App\Http\Resources\BookResource;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class ReviewRepository {
     protected $total = array();
@@ -43,20 +44,31 @@ class ReviewRepository {
     }
 
     public function postReviewBook($request) {
-
-        Review::create([
-            'book_id' => $request->book_id,
-            'review_title' => $request->review_title,
-            'review_details' => $request->review_details,
-            'review_date' => $request->review_date,
-            'rating_start' => $request->rating_start,
-        ]);
-
-        return response()->json(
-            [
-                'message' => 'Create Success A Review Book'
-            ],
-            201
-        ); 
+        try {
+            //code...
+            Review::create([
+                'book_id' => $request->book_id,
+                'review_title' => $request->review_title,
+                'review_details' => $request->review_details,
+                'review_date' => Carbon::now('Asia/Ho_Chi_Minh'),
+                'rating_start' => $request->rating_start,
+            ]);
+    
+            return response()->json(
+                [
+                    'message' => 'Create Success A Review Book'
+                ],
+                201
+            ); 
+        } catch (\Throwable $th) {
+            // throw $th;
+            return response()->json(
+                [
+                    'message'=>'Error Review !'
+                ],
+                422
+            );
+        }
+        
     }
 }
