@@ -79,6 +79,16 @@ const bookReducer = (state = initState, action) => {
                     sort_review: action.payload,
                 },
             };
+        case "SET_DEFAULT_REVIEW":
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    limit: action.payload.limit,
+                    star: action.payload.star,
+                    page: action.payload.page,
+                },
+            };
         case "FILTER_BY_AUTHOR":
             return {
                 ...state,

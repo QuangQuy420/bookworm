@@ -19,7 +19,7 @@ function CartBook(props) {
                         src={`images/${book.book_cover_photo ? book.book_cover_photo : 'default-image'}.jpg`}
                         className="cart__details-img"
                     ></img>
-                    <div>
+                    <div className='cart__details-info'>
                         <div className="cart__details-title">
                             {book.book_title}
                         </div>

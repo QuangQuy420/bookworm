@@ -94,7 +94,7 @@ function ListReview(props) {
                 <SortShow
                     itemShow={itemShow}
                     itemSort={itemSort}
-                    defaultShow={"Show 4"}
+                    defaultShow={"Show 5"}
                     defaultSort={"Sort by date: newest to oldest"}
                     titleName={"reviews"}
                     onFilterShow={handleFilterShow}

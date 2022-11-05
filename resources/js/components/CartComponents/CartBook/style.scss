@@ -8,13 +8,13 @@
         &-container {
             display: flex;
             margin: 12px 0;
+        }
 
-            & div {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                margin-left: 12px;
-            }
+        &-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 12px;
         }
 
         &-img {
@@ -24,6 +24,10 @@
         &-title {
             font-size: 24px;
             font-weight: 500;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
         }
 
         &-price {

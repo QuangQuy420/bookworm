@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 import * as reviewServices from "../../../apiServices/reviewServices";
+import ToastSuccess from "../../ToastSuccess";
 import "./style.scss";
 
 function FormReview(props) {
-    const bookId = JSON.parse(localStorage.getItem("book_id"))
+    const bookId = JSON.parse(localStorage.getItem("book_id"));
 
     const {
         register,
@@ -14,25 +14,6 @@ function FormReview(props) {
     } = useForm();
 
     const [successMes, setSuccessMes] = useState(false);
-    const [dataSubmit, setDataSubmit] = useState({});
-
-    const getDateTime = () => {
-        let today = new Date();
-        let date =
-            today.getFullYear() +
-            "-" +
-            (today.getMonth() + 1) +
-            "-" +
-            today.getDate();
-        let time =
-            today.getHours() +
-            ":" +
-            today.getMinutes() +
-            ":" +
-            today.getSeconds();
-        let dateTime = date + " " + time;
-        return dateTime;
-    };
 
     const handleSubmitReview = async (data) => {
         const dataSubmit = {
@@ -40,7 +21,6 @@ function FormReview(props) {
             review_title: data.reviewTitle,
             review_details: data.reviewDetail,
             rating_start: data.reviewStar,
-            review_date: getDateTime(),
         };
 
         await reviewServices.postReview("/post-review", dataSubmit);
@@ -74,10 +54,9 @@ function FormReview(props) {
                         <label htmlFor="reviewDetails">
                             Details please! Your review helps other shoppers
                         </label>
-                        <input
+                        <textarea
                             id="reviewDetails"
                             {...register("reviewDetail")}
-                            type="textarea"
                         />
                     </div>
                     <div className="review__form-group">
@@ -92,13 +71,7 @@ function FormReview(props) {
                     </div>
                     <div className="review__submit-form">
                         <input type="submit" />
-                        {successMes ? (
-                            <span className="review__success-message">
-                                Submit Review Success
-                            </span>
-                        ) : (
-                            ""
-                        )}
+                        {successMes ? <ToastSuccess title={'Post Review Success'} content={'Your Review has been recorded'} /> : ""}
                     </div>
                 </form>
             </div>

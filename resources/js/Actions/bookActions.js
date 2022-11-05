@@ -14,6 +14,7 @@ import {
     SET_FILTER_SORT_REVIEW,
     SET_NAME_USER,
     SET_DISPLAY_DEFAULT,
+    SET_DEFAULT_REVIEW,
 } from "../Constants/bookConstants";
 
 export const getCategoryName = (data) => {
@@ -104,6 +105,12 @@ export const getDetailBook = (data) => {
 export const setFilterSortReview = (data) => {
     return {
         type: SET_FILTER_SORT_REVIEW,
+        payload: data,
+    };
+};
+export const setDefaultReview = (data) => {
+    return {
+        type: SET_DEFAULT_REVIEW,
         payload: data,
     };
 };

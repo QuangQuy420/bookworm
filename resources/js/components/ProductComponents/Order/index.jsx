@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartQuantity } from "../../../Actions/bookActions";
+import ToastSuccess from "../../ToastSuccess";
 import "./style.scss";
 
 function Order(props) {
@@ -8,6 +9,7 @@ function Order(props) {
     const { id, discount_price, final_price, book_price, book_cover_photo, book_title, author_name } = detailBook;
     const dispatch = useDispatch()
     const [quantity, setQuantity] = useState(1);
+    const [showMessage, setShowMessage] = useState(false)
     const [quantityAvailable, setQuantityAvailable] = useState(0)
     const [tempCart, setTempCart] = useState(
         JSON.parse(localStorage.getItem("cart"))
@@ -48,6 +50,7 @@ function Order(props) {
         if (tempCart.length == 0) {
             setTempCart([obj]);
         }
+
         const cartItem = tempCart.forEach((item) => {
             if (item.book_id == id) {
                 item.quantity = item.quantity + quantity;
@@ -56,6 +59,11 @@ function Order(props) {
                 setTempCart([...tempCart, obj]);
             }
         });
+
+        setShowMessage(true)
+        setTimeout(() => {
+            setShowMessage(false)
+        }, 1500);
     };
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(tempCart));
@@ -91,6 +99,10 @@ function Order(props) {
                     <button className="order__buy" onClick={handleAddCart}>
                         Add to Cart
                     </button>
+                    {
+                        showMessage ? <ToastSuccess title={'Add Book Success'} content={'The product has been added to cart'} /> : ''
+                    }
+                    
                 </div>
             </div>
         </div>

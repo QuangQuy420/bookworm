@@ -28,13 +28,17 @@
             margin-bottom: 4px;
         }
 
+        & textarea {
+            height: 80px;
+        }
+
         & .required-message {
             color: red;
         }
     }
 
     &__submit-form {
-        margin: 8px 0;
+        margin: 8px 12px;
         display: flex;
         flex-direction: column;
         justify-content: center;

@@ -7,10 +7,8 @@ import * as reviewServices from "../../apiServices/reviewServices";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-    filterByRating,
     getDetailBook,
-    handlePaginate,
-    setFilterShow,
+    setDefaultReview,
 } from "../../Actions/bookActions";
 
 import "./style.scss";
@@ -22,9 +20,11 @@ function Product(props) {
     const [categoryName, setCategoryName] = useState('Category Name')
 
     useEffect(() => {
-        dispatch(setFilterShow(4));
-        dispatch(filterByRating(""));
-        dispatch(handlePaginate(1));
+        dispatch(setDefaultReview({
+            limit: 5,
+            star: "",
+            page: 1
+        }))
     }, []);
 
     useEffect(() => {

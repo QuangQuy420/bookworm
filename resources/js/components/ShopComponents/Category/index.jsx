@@ -38,7 +38,7 @@ function Category(props) {
                 key={index}
                 onClick={() => handleFilter(value.id, index)}
             >
-                {value.category_name}
+                {value.category_name.charAt(0).toUpperCase() + value.category_name.slice(1)}
             </li>
         );
     });
