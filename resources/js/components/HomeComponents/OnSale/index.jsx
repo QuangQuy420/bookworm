@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Carousel, CarouselItem, CarouselControl } from "reactstrap";
-
 import CardBook from "../../CardBook";
 import "./style.scss";
 
@@ -25,7 +24,6 @@ function OnSale(props) {
         const prevIndex = (index === 0 ? 0 : index - 1);
         setIndex(prevIndex);
     };
-
 
     const slides = displayBook[index].map((book, index) => {
         return (

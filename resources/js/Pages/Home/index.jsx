@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-
 import FeaturedBook from "../../components/HomeComponents/FeaturedBook";
 import OnSale from "../../components/HomeComponents/OnSale";
-
 import * as bookServices from '../../apiServices/bookServices';
 import "./style.scss";
 
 function Home(props) {
-
     const [ saleBooks, setSaleBooks ] = useState([]);
     const [ featuredBooks, setFeaturedBooks ] = useState([]);
-    const [ apiUrl, setApiUrl ] = useState('/get-recommend-books')
+    const [ apiUrl, setApiUrl ] = useState('/books/recommend')
 
     const handleFilterBook = (apiUrl) => {
         setApiUrl(apiUrl);
@@ -18,8 +15,9 @@ function Home(props) {
 
     useEffect(() => {
         const getSaleBooks = async () => {
-            const result = await bookServices.getListBooks('/get-sale-books');
-            setSaleBooks(result.ListBook.data)
+            const endpoint = '/books/on-sale';
+            const result = await bookServices.getListBooks(endpoint);
+            setSaleBooks(result.ListBook.data);
         }
         getSaleBooks()
     }, []);

@@ -17,7 +17,6 @@ class BookController extends Controller
      */
 
     protected $bookRepository;
-
     public function __construct(BookRepository $bookRepository) {
         return $this->bookRepository = $bookRepository;
     }

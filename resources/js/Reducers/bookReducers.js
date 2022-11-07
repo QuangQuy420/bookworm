@@ -14,7 +14,7 @@ const initState = {
         limit: "",
         sort: "on-sale",
         sort_review: "DESC",
-        link: "/get-sale-books",
+        link: "/books/on-sale",
         author: "",
         category: "",
         star: "",

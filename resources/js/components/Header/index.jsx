@@ -1,8 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar, NavbarBrand, NavItem } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./style.scss";
 import { useSelector } from "react-redux";
 import LogIn from "../LogIn";
 import {
@@ -12,6 +10,7 @@ import {
     DropdownToggle,
 } from "reactstrap";
 import * as authServices from "../../apiServices/authServices";
+import "./style.scss";
 
 function Header(props) {
     const [headerElement, setHeaderElement] = useState([
@@ -20,13 +19,13 @@ function Header(props) {
         "About",
         "Cart",
     ]);
-    const linkElement = ["/home", "/shop", "/about", "/cart", ""];
+    const linkElement = ["/home", "/shop", "/about", "/cart"];
     const quantityCart = useSelector((state) => state.book.totalCart);
-    
+    const quantityBook = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).length : quantityCart;
     const nameUser = JSON.parse(localStorage.getItem("name_user"));
     const token = JSON.parse(localStorage.getItem("token")) || "";
-    
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    
     const toggle = () => {
         setDropdownOpen(!dropdownOpen);
     };
@@ -76,7 +75,7 @@ function Header(props) {
                                     >
                                         {element}
                                         {index == 3 && (
-                                            <span> ({quantityCart})</span>
+                                            <span> ({quantityBook})</span>
                                         )}
                                     </NavLink>
                                 </NavItem>

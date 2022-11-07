@@ -46,7 +46,9 @@ function Rating(props) {
     return (
         <>
             <h5>Rating Review</h5>
-            <ul className="list-filter">{slides}</ul>
+            <ul className="list-filter">
+                {slides}
+            </ul>
         </>
     );
 }

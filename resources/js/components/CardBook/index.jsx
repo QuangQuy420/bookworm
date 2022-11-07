@@ -1,12 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText, CardFooter } from "reactstrap";
-
 import "./style.scss";
 
 function CardBook(props) {
-    const dispatch = useDispatch()
     const { detailBook } = props;
     const {
         id,
@@ -25,7 +22,7 @@ function CardBook(props) {
 
     const handleGetDetail = (bookId) => {
         localStorage.setItem("book_id",JSON.stringify(bookId)); 
-        let path = `/shop/product`; 
+        let path = `/shop/product/${bookId}`; 
         navigate(path);
     }
 

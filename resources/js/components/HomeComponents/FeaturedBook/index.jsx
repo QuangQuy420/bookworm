@@ -1,13 +1,11 @@
-import React, { useRef, useState } from "react";
-
+import React, { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import CardBook from "../../CardBook";
-
 import "./style.scss";
 
 function FeaturedBook(props) {
     const { featuredBooks, onFilterBook } = props;
-    const [ active, setActive ] = useState('/get-recommend-books')
+    const [ active, setActive ] = useState('/books/recommend')
 
     const handleFilterBook = (apiUrl, tag) => {
         if(onFilterBook) {
@@ -29,14 +27,14 @@ function FeaturedBook(props) {
             <h4>Featured Books</h4>
             <div className="container__feature-btn">
                 <Button 
-                    className={active == '/get-recommend-books' ? 'active' : ''}
-                    onClick={() => handleFilterBook('/get-recommend-books')}
+                    className={active == '/books/recommend' ? 'active' : ''}
+                    onClick={() => handleFilterBook('/books/recommend')}
                 >
                     Recommended
                 </Button>
                 <Button 
-                    className={active == '/get-popular-books' ? 'active' : ''}
-                    onClick={() => handleFilterBook('/get-popular-books')}
+                    className={active == '/books/popular' ? 'active' : ''}
+                    onClick={() => handleFilterBook('/books/popular')}
                 >
                     Popular
                 </Button>

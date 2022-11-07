@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import ContentShop from "../../components/ShopComponents/ContentShop";
 import TitleShop from "../../components/ShopComponents/TitleShop";
-
 import * as bookServices from "../../apiServices/bookServices";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,7 +23,7 @@ function Shop(props) {
             author: "",
             category: "",
             star: "",
-            link: '/get-sale-books'
+            link: '/books/on-sale'
         }))
     }, []);
 
@@ -50,7 +49,7 @@ function Shop(props) {
 
     useEffect(() => {
         const getNameCategory = async () => {
-            const result = await bookServices.getAllName("/get-category-name");
+            const result = await bookServices.getAllName("/names/category");
             dispatch(getCategoryName(result.category));
         };
         getNameCategory();
@@ -58,7 +57,7 @@ function Shop(props) {
 
     useEffect(() => {
         const getNameAuthor = async () => {
-            const result = await bookServices.getAllName("/get-author-name");
+            const result = await bookServices.getAllName("/names/author");
             dispatch(getAuthorName(result.author));
         };
         getNameAuthor();

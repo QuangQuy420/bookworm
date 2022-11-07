@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import {
     ButtonGroup,
     DropdownItem,
@@ -7,7 +6,6 @@ import {
     DropdownToggle,
     UncontrolledDropdown,
 } from "reactstrap";
-
 import "./style.scss";
 
 function SortShow(props) {
@@ -22,7 +20,6 @@ function SortShow(props) {
         pagination,
     } = props;
     const { from, to, total } = pagination;
-
     const [displayShow, setDisplayShow] = useState(defaultShow);
     const [displaySort, setDisplaySort] = useState(defaultSort);
 

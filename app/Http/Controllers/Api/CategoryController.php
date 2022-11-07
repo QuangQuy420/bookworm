@@ -15,18 +15,13 @@ class CategoryController extends Controller
      */
 
     protected $categoryRepository;
-
     public function __construct(CategoryRepository $categoryRepository) {
         return $this->categoryRepository = $categoryRepository;
     }
 
-    public function getCategoryName() {
-        return $this->categoryRepository->getCategoryName();
-    }
-
     public function index()
     {
-        //
+        return $this->categoryRepository->getCategoryName();
     }
 
     /**

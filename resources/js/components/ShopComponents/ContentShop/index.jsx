@@ -4,9 +4,8 @@ import SortShow from '../../SortShow';
 import DisplayBook from '../DisplayBook';
 import FilterShop from '../FilterShop';
 import { handlePaginate, setFilterShow, setFilterSort } from "../../../Actions/bookActions";
-
-import './style.scss'
 import { useDispatch, useSelector } from 'react-redux';
+import './style.scss'
 
 function ContentShop(props) {
     const dispatch = useDispatch()
@@ -26,19 +25,19 @@ function ContentShop(props) {
         }
         if (index == 0) {
             data.sort = "",
-            data.link = "/get-sale-books"
+            data.link = "/books/on-sale"
         } 
         else if (index == 1) {
             data.sort = "",
-            data.link = "/get-popular-books"
+            data.link = "/books/popular"
         }
         else if (index == 2) {
             data.sort = "ASC"
-            data.link = "/get-all-books"
+            data.link = "/books"
         }
         else if (index == 3) {
             data.sort = "DESC"
-            data.link = "/get-all-books"
+            data.link = "/books"
         }  
         dispatch(setFilterSort(data))
         dispatch(handlePaginate(1))

@@ -13,6 +13,7 @@ class AuthRepository{
     public function login($request) {
 
         $user = User::where('email', $request->email)->first();
+
         if($request->email == '' || $request->password == '') {
             return response()->json(
                 [
@@ -49,6 +50,7 @@ class AuthRepository{
     public function logout()
     {
         auth()->user()->tokens()->delete();
+        
             return response()->json(
             [
                 'message' => 'Logout Success ! '

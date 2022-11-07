@@ -1,9 +1,6 @@
 import React from 'react';
 import DefaultLayout from '../components/DefaultLayout';
-
 import { createHashRouter } from "react-router-dom";
-
-import SignIn from './SignIn';
 import Home from './Home';
 import About from './About';
 import Cart from './Cart';
@@ -29,7 +26,7 @@ const router = createHashRouter([
         )
     },
     {
-        path: '/shop/product',
+        path: '/shop/product/:id',
         element: (
             <DefaultLayout>
                <Product/>
@@ -52,14 +49,6 @@ const router = createHashRouter([
             </DefaultLayout>
         )
     },
-    // {
-    //     path: '/sign-in',
-    //     element: (
-    //         <DefaultLayout>
-    //            <SignIn/>
-    //         </DefaultLayout>
-    //     )
-    // },
     {
         path: '*',
         element: (

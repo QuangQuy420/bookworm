@@ -3,7 +3,6 @@ import './style.scss'
 
 function CartBook(props) {
     const { carts, onCountTotal } = props
-    const [render, setRender] = useState(true)
 
     const handleQuantity = (quantity, id) => {
         if(onCountTotal) {

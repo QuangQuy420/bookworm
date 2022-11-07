@@ -10,7 +10,6 @@ use App\Http\Requests\ReviewPostRequest;
 class ReviewController extends Controller
 {
     protected $reviewRepository;
-
     public function __construct(ReviewRepository $reviewRepository) {
         $this->reviewRepository = $reviewRepository;
     }

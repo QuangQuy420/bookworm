@@ -3,7 +3,6 @@ import Footer from '../Footer';
 import Header from '../Header';
 import './style.scss'
 
-
 function DefaultLayout({ children }) {
     return (
         <>

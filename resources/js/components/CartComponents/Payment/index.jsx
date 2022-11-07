@@ -5,7 +5,6 @@ import { setCartQuantity } from "../../../Actions/bookActions";
 import { useDispatch } from "react-redux";
 import ToastSuccess from "../../ToastSuccess";
 import { useNavigate } from "react-router-dom";
-
 import "./style.scss";
 
 function Payment(props) {
@@ -14,6 +13,7 @@ function Payment(props) {
     let navigate = useNavigate();
     const [showLogin, setShowLogin] = useState(false);
     const [showMessage, setShowMessage] = useState(false);
+    const [render, setRender] = useState(true)
 
     const token = JSON.parse(localStorage.getItem("token"))
     let totalPrice = 0;
@@ -41,7 +41,8 @@ function Payment(props) {
             localStorage.removeItem("cart");
             onOrder();
             dispatch(setCartQuantity(0));
-            setShowMessage(true)
+            setShowMessage(true);
+            setRender(!render);
             
             setTimeout(() => {
                 navigate('/home');

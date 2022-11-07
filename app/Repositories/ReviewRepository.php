@@ -25,10 +25,8 @@ class ReviewRepository {
 
     public function getDetailReview($id, $request) {
         $book = new BookResource(Book::getListBooks()->findOrFail($id));
-
         $reviews = $this->filterReview($id, $request);
-        $reviews = new ReviewCollection($reviews->sortDate($this->sort)->paginate($this->limit ? $this->limit : 4));
-        
+        $reviews = new ReviewCollection($reviews->sortDate($this->sort)->paginate($this->limit ? $this->limit : 5));
         $rating = Review::getDetailReviews($id)->get();
 
         for ($star = 1; $star <= 5; $star++) {

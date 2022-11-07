@@ -23,19 +23,23 @@ use App\Http\Controllers\Api\OrderController;
 
 Route::middleware('auth:sanctum')->group(function () {
     route::get('/logout', [AuthController::class, 'logout']);
-    route::post('/order', [OrderController::class, 'store']);
+    route::resource('/order', OrderController::class)->only(['store']);
 }); 
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/get-sale-books', [BookController::class, 'getSaleBooks']);
-Route::get('/get-recommend-books', [BookController::class, 'getRecommendBooks']);
-Route::get('/get-popular-books', [BookController::class, 'getPopularBooks']);
-Route::get('/get-all-books', [BookController::class, 'getAllBooks']);
+Route::prefix('books')->group(function () {
+    Route::get('/', [BookController::class, 'getAllBooks']);
+    Route::get('/on-sale', [BookController::class, 'getSaleBooks']);
+    Route::get('/recommend', [BookController::class, 'getRecommendBooks']);
+    Route::get('/popular', [BookController::class, 'getPopularBooks']);
+});
 
-Route::get('/get-category-name', [CategoryController::class, 'getCategoryName']);
-Route::get('/get-author-name', [AuthorController::class, 'getAuthorName']);
+Route::prefix('names')->group(function () {
+    Route::resource('/category', CategoryController::class)->only(['index']);
+    Route::resource('/author', AuthorController::class)->only(['index']);
+});
 
-Route::resource('/get-detail-reviews', ReviewController::class)->only(['show']);
-Route::post('/post-review', [ReviewController::class, 'store']);
+Route::resource('/reviews', ReviewController::class)->only(['show']);
+Route::resource('/review', ReviewController::class)->only(['store']);
 

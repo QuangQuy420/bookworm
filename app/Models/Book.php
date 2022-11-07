@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
-
 use App\Models\Discount;
 use App\Models\Author;
 use App\Models\Review;
 use App\Models\Category;
+use Carbon\Carbon;
 
 class Book extends Model
 {

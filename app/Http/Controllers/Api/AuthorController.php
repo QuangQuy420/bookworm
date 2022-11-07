@@ -15,17 +15,13 @@ class AuthorController extends Controller
      */
 
     protected $authorRepository;
-
     public function __construct(AuthorRepository $authorRepository) {
         return $this->authorRepository = $authorRepository;
     }
 
-    public function getAuthorName() {
-        return $this->authorRepository->getAuthorName();
-    }
     public function index()
     {
-        //
+        return $this->authorRepository->getAuthorName();
     }
 
     /**

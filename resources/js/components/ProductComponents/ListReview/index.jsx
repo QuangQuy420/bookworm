@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFilterShow, setFilterSortReview, handlePaginate, filterByRating } from "../../../Actions/bookActions";
 import Pagination from "../../Pagination";
 import SortShow from "../../SortShow";
-
 import "./style.scss";
 
 function ListReview(props) {
@@ -12,12 +11,11 @@ function ListReview(props) {
     const { rating, total, reviews, meta,  } = detailsBook;
     const [ titleSort, setTitleSort ] = useState('newest to oldest')
     const [ starFilter, setStarFilter ] = useState("")
-
+    const itemShow = [5, 10, 15, 20];
     const itemSort = [
         "Sort by date: newest to oldest",
         "Sort by date: oldest to newest",
     ];
-    const itemShow = [5, 10, 15, 20];
 
     const slideTotal = total.map((star, index) => {
         return (
@@ -34,14 +32,14 @@ function ListReview(props) {
     const slideReviews = reviews.map((review, index) => {
         return (
             <div key={index} className="review__detail">
-                    <div className="review__detail-title">
-                        <h3>{review.review_title}</h3>
-                        <span>{review.rating_start} stars</span>
-                    </div>
-                    <span className="review__detail-content">
-                        {review.review_details}
-                    </span>
-                    <span className="review__detail-date">{review.review_date}</span>
+                <div className="review__detail-title">
+                    <h3>{review.review_title}</h3>
+                    <span>{review.rating_start} stars</span>
+                </div>
+                <span className="review__detail-content">
+                    {review.review_details}
+                </span>
+                <span className="review__detail-date">{review.review_date}</span>
             </div>
         )
     })

@@ -12,7 +12,6 @@ import {
     SET_CART_QUANTITY,
     SET_FILTER_SORT,
     SET_FILTER_SORT_REVIEW,
-    SET_NAME_USER,
     SET_DISPLAY_DEFAULT,
     SET_DEFAULT_REVIEW,
 } from "../Constants/bookConstants";

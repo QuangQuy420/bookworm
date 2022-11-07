@@ -4,13 +4,11 @@ import Order from "../../components/ProductComponents/Order";
 import ListReview from "../../components/ProductComponents/ListReview";
 import FormReview from "../../components/ProductComponents/FormReview";
 import * as reviewServices from "../../apiServices/reviewServices";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
     getDetailBook,
     setDefaultReview,
 } from "../../Actions/bookActions";
-
 import "./style.scss";
 
 function Product(props) {
@@ -39,7 +37,7 @@ function Product(props) {
                 },
             };
             const result = await reviewServices.getListReviews(
-                `/get-detail-reviews/${bookId}`,
+                `/reviews/${bookId}`,
                 filter
             );
             setCategoryName(result.book.category_name);

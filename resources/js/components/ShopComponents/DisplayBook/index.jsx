@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import CardBook from '../../CardBook';
-
-
 import './style.scss'
 
 function DisplayBook(props) {

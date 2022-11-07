@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch} from "react-redux";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import * as authServices from "../../apiServices/authServices";
-
 import "./style.scss";
 
 function LogIn(props) {

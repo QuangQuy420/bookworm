@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import Author from "../Author";
 import Category from "../Category";
 import Rating from "../Rating";
-
 import "./style.scss";
 
 function FilterShop(props) {

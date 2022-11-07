@@ -15,10 +15,13 @@
     justify-content: space-between;
     width: 1600px;
 
-
     &__page {
         display: flex;
         text-decoration: none;
+    }
+
+    &-expand.navbar-light {
+        justify-content: space-between;
     }
 }
 

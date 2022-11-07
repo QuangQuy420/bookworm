@@ -65,6 +65,7 @@ function Order(props) {
             setShowMessage(false)
         }, 1500);
     };
+    
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(tempCart));
         dispatch(setCartQuantity(tempCart.length))
@@ -96,7 +97,7 @@ function Order(props) {
                             +
                         </button>
                     </div>
-                    <button className="order__buy" onClick={handleAddCart}>
+                    <button className="order__buy" disabled={quantity == 0} onClick={handleAddCart}>
                         Add to Cart
                     </button>
                     {

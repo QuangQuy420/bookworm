@@ -23,7 +23,7 @@ function FormReview(props) {
             rating_start: data.reviewStar,
         };
 
-        await reviewServices.postReview("/post-review", dataSubmit);
+        await reviewServices.postReview("/review", dataSubmit);
 
         setSuccessMes(true);
         console.log(dataSubmit);

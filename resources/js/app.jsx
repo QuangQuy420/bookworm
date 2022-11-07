@@ -4,9 +4,9 @@ import { configureStore } from "@reduxjs/toolkit"
 import { RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'
-
 import router from './Pages/App';
 import bookReducer from './Reducers/bookReducers';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const store = configureStore({
   reducer: {
