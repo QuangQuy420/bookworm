@@ -11565,7 +11565,7 @@ function Product(props) {
                   }
                 };
                 _context.next = 4;
-                return _apiServices_reviewServices__WEBPACK_IMPORTED_MODULE_6__.getListReviews("/reviews/".concat(bookId), filter);
+                return _apiServices_reviewServices__WEBPACK_IMPORTED_MODULE_6__.getListReviews("/review/".concat(bookId), filter);
 
               case 4:
                 result = _context.sent;
@@ -11716,19 +11716,20 @@ function Shop(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var getNameCategory = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var result;
+        var endpoint, result;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return _apiServices_bookServices__WEBPACK_IMPORTED_MODULE_4__.getAllName("/names/category");
+                endpoint = "/names/category";
+                _context2.next = 3;
+                return _apiServices_bookServices__WEBPACK_IMPORTED_MODULE_4__.getAllName(endpoint);
 
-              case 2:
+              case 3:
                 result = _context2.sent;
                 dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getCategoryName)(result.category));
 
-              case 4:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -11746,19 +11747,20 @@ function Shop(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var getNameAuthor = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var result;
+        var endpoint, result;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
-                return _apiServices_bookServices__WEBPACK_IMPORTED_MODULE_4__.getAllName("/names/author");
+                endpoint = "/names/author";
+                _context3.next = 3;
+                return _apiServices_bookServices__WEBPACK_IMPORTED_MODULE_4__.getAllName(endpoint);
 
-              case 2:
+              case 3:
                 result = _context3.sent;
                 dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_6__.getAuthorName)(result.author));
 
-              case 4:
+              case 5:
               case "end":
                 return _context3.stop();
             }

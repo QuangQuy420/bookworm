@@ -37,7 +37,7 @@ function Product(props) {
                 },
             };
             const result = await reviewServices.getListReviews(
-                `/reviews/${bookId}`,
+                `/review/${bookId}`,
                 filter
             );
             setCategoryName(result.book.category_name);

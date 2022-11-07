@@ -6,7 +6,7 @@ use App\Http\Resources\AuthorCollection;
 
 class AuthorRepository {
     public function getAuthorName() {
-        $query = new AuthorCollection(Author::getAuthorName()->paginate(10));
+        $query = new AuthorCollection(Author::getAuthorName()->get());
         
         return response()->json([
             'author' => $query

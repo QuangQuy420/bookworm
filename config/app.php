@@ -15,6 +15,13 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    // Constant homePage
+    'limitItemOnSale' => env('LIMIT_ITEM_ON_SALE', 10),
+    'limitItemFeatured' => env('LIMIT_ITEM_FEATURED', 8),
+
+    // Location set date
+    'currentLocation' => env('CURRENT_LOCATION', 'Asia/Ho_Chi_Minh'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

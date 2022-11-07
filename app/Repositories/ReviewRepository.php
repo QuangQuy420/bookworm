@@ -26,7 +26,7 @@ class ReviewRepository {
     public function getDetailReview($id, $request) {
         $book = new BookResource(Book::getListBooks()->findOrFail($id));
         $reviews = $this->filterReview($id, $request);
-        $reviews = new ReviewCollection($reviews->sortDate($this->sort)->paginate($this->limit ? $this->limit : 5));
+        $reviews = new ReviewCollection($reviews->sortDate($this->sort)->paginate($this->limit));
         $rating = Review::getDetailReviews($id)->get();
 
         for ($star = 1; $star <= 5; $star++) {
@@ -43,12 +43,13 @@ class ReviewRepository {
 
     public function postReviewBook($request) {
         try {
+            $currentLocation = config('app.currentLocation');
             //code...
             Review::create([
                 'book_id' => $request->book_id,
                 'review_title' => $request->review_title,
                 'review_details' => $request->review_details,
-                'review_date' => Carbon::now('Asia/Ho_Chi_Minh'),
+                'review_date' => Carbon::now($currentLocation),
                 'rating_start' => $request->rating_start,
             ]);
     

@@ -49,7 +49,8 @@ function Shop(props) {
 
     useEffect(() => {
         const getNameCategory = async () => {
-            const result = await bookServices.getAllName("/names/category");
+            const endpoint = "/names/category";
+            const result = await bookServices.getAllName(endpoint);
             dispatch(getCategoryName(result.category));
         };
         getNameCategory();
@@ -57,7 +58,8 @@ function Shop(props) {
 
     useEffect(() => {
         const getNameAuthor = async () => {
-            const result = await bookServices.getAllName("/names/author");
+            const endpoint = "/names/author";
+            const result = await bookServices.getAllName(endpoint);
             dispatch(getAuthorName(result.author));
         };
         getNameAuthor();

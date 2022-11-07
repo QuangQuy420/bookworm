@@ -36,7 +36,8 @@ class BookRepository {
     }
 
     public function getRecommendBooks() {
-        $result = new BookCollection(Book::getListBooks()->getRecommendBooks()->paginate(8));
+        $perPage = config('app.limitItemFeatured');
+        $result = new BookCollection(Book::getListBooks()->getRecommendBooks()->paginate($perPage));
 
         return response()->json([
             'ListBook' => $result
@@ -44,8 +45,9 @@ class BookRepository {
     }
 
     public function getPopularBooks($request) {
+        $perPage = config('app.limitItemFeatured');
         $result = $this->filterBook($request);
-        $result = new BookCollection($result->getPopularBooks()->paginate($this->limit ? $this->limit : 8));
+        $result = new BookCollection($result->getPopularBooks()->paginate($this->limit ? $this->limit : $perPage));
 
         return response()->json([
             'ListBook' => $result

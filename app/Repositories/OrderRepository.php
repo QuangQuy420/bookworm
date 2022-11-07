@@ -14,6 +14,7 @@ class OrderRepository {
     public function order($request) {
         DB::beginTransaction();
         try {
+            $currentLocation = config('app.currentLocation');
             $order_id = DB::table('order')->max('id');
             $order_amount = 0;
             if ($order_id == null) {
@@ -28,7 +29,7 @@ class OrderRepository {
 
             Order::Create([
                 'user_id'=> $request->user()->id,
-                'order_date'=> Carbon::now('Asia/Ho_Chi_Minh'),
+                'order_date'=> Carbon::now($currentLocation),
                 'order_amount'=> $order_amount
             ]);
 

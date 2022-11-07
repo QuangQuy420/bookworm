@@ -40,6 +40,7 @@ Route::prefix('names')->group(function () {
     Route::resource('/author', AuthorController::class)->only(['index']);
 });
 
-Route::resource('/reviews', ReviewController::class)->only(['show']);
-Route::resource('/review', ReviewController::class)->only(['store']);
+Route::resource('/review', ReviewController::class)->except([
+    'index', 'create', 'edit', 'update', 'destroy'
+]);
 
