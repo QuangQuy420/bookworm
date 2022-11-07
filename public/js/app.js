@@ -11077,7 +11077,7 @@ function About(props) {
     className: "about",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "about__title",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
         children: "About Us"
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -11624,7 +11624,7 @@ function Product(props) {
     getReviewBook();
   }, [filterReview]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h5", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h4", {
       className: "product__title",
       children: categoryName[0].toUpperCase() + categoryName.slice(1)
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
@@ -13427,7 +13427,7 @@ function DetailBook(props) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "row detail__container",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "col-4",
+        className: "img col-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
           className: "detail__img",
           src: urlBook,
@@ -14498,7 +14498,7 @@ function TitleShop(props) {
       star = filter.star;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "shop__title",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
       children: "Books"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
       children: [" ", "(Filtered by", " ", author && listAuthorName[author] ? "Author: ".concat(listAuthorName[author].author_name) : "", " ", category && listCategoryName[category] ? "Category: ".concat(listCategoryName[category].category_name) : "", " ", star ? "Over ".concat(star, " Star") : "", ")"]
@@ -14904,7 +14904,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".about {\n  margin-bottom: 150px;\n}\n.about .container {\n  margin: 0 auto;\n}\n.about__title {\n  border-bottom: 1px solid #333;\n  padding-bottom: 12px;\n}\n.about__content {\n  max-width: 900px;\n}\n.about__description {\n  margin-bottom: 24px;\n}\n.about__description-title {\n  display: flex;\n  justify-content: center;\n  margin: 24px 0 36px 0;\n}\n.about__history h4 {\n  margin-bottom: 12px;\n}\n.about__history span {\n  display: flex;\n  margin-bottom: 12px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".about {\n  margin-bottom: 150px;\n}\n.about .container {\n  margin: 0 auto;\n}\n.about__title {\n  border-bottom: 1px solid #333;\n  padding-bottom: 12px;\n}\n.about__content.container {\n  max-width: 900px;\n  margin-top: 60px;\n}\n.about__description {\n  margin-bottom: 40px;\n}\n.about__description-title {\n  display: flex;\n  justify-content: center;\n  margin: 24px 0 36px 0;\n}\n.about__history h5 {\n  margin-bottom: 12px;\n}\n.about__history span {\n  display: flex;\n  margin-bottom: 12px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15000,7 +15000,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".product__title {\n  border-bottom: 1px solid #6c6c6c;\n  padding-bottom: 24px;\n  margin: 0 -12px 16px -12px;\n}\n.product__review {\n  margin-top: 24px;\n  margin-bottom: 150px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".product__title {\n  border-bottom: 1px solid #6c6c6c;\n  padding-bottom: 24px;\n  margin: 0 -12px 24px -12px;\n}\n.product__review.row {\n  margin-top: 24px;\n  margin-bottom: 150px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15096,7 +15096,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".cart__payment {\n  padding: 0 0 0 24px;\n}\n.cart__payment-container {\n  border: 1px solid #333;\n  border-radius: 4px;\n}\n.cart__payment-container .toast__message-success {\n  height: 90px;\n  width: 92%;\n  margin: 0 auto 12px;\n}\n.cart__payment-title {\n  font-weight: 500;\n}\n.cart__payment-content {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.cart__payment-content h5 {\n  font-size: 30px;\n  margin: 24px 0;\n}\n.cart__payment-content button {\n  margin-bottom: 24px;\n  min-width: 240px;\n  border: none;\n  background-color: #dadada;\n  padding: 6px 0;\n  border-radius: 4px;\n}\n.cart__payment-content button:hover {\n  background-color: #6c757d;\n  color: #fff;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".cart__payment {\n  padding: 0 0 0 24px;\n}\n.cart__payment-container {\n  border: 1px solid #333;\n  border-radius: 4px;\n}\n.cart__payment-container .toast__message-success {\n  height: 90px;\n  width: 92%;\n  margin: 0 auto 12px;\n}\n.cart__payment-title {\n  font-weight: 500;\n}\n.cart__payment-content {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.cart__payment-content h5 {\n  font-size: 30px;\n  margin: 24px 0;\n}\n.cart__payment-content button {\n  margin-bottom: 24px;\n  min-width: 240px;\n  border: none;\n  background-color: #dadada;\n  padding: 6px 0;\n  border-radius: 4px;\n  font-weight: 500;\n}\n.cart__payment-content button:hover {\n  background-color: #6c757d;\n  color: #fff;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15288,7 +15288,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".detail {\n  border: 1px solid #6c6c6c;\n  padding: 0;\n  border-radius: 4px;\n}\n.detail__img {\n  width: 100%;\n  border-radius: 4px;\n}\n.detail__author {\n  display: flex;\n  justify-content: center;\n  margin: 12px 0;\n}\n.detail__content {\n  margin: 20px 0;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".detail {\n  border: 1px solid #6c6c6c;\n  padding: 0;\n  border-radius: 4px;\n}\n.detail__img {\n  width: 100%;\n  border-radius: 4px;\n}\n.detail__author {\n  display: flex;\n  justify-content: center;\n  margin: 12px 0;\n}\n.detail__content.col-8 {\n  margin: 20px 0;\n}\n.detail__container .img {\n  padding-left: 0;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15312,7 +15312,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".review__form {\n  padding: 0 0 0 24px;\n}\n.review__add {\n  display: flex;\n  flex-direction: column;\n  border: 1px solid #6c6c6c;\n  border-radius: 4px;\n}\n.review__add-title {\n  display: block;\n  border-radius: 4px;\n  border-bottom: 1px solid #6c6c6c;\n  font-size: 20px;\n  font-weight: 500;\n  padding: 8px;\n}\n.review__form-group {\n  display: flex;\n  flex-direction: column;\n  margin: 12px 12px 24px;\n}\n.review__form-group label {\n  margin-bottom: 4px;\n}\n.review__form-group textarea {\n  height: 80px;\n}\n.review__form-group .required-message {\n  color: red;\n}\n.review__submit-form {\n  margin: 8px 12px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.review__submit-form input {\n  background-color: #dadada;\n  border: 1px solid #dadada;\n  border-radius: 4px;\n  padding: 4px 16px;\n}\n.review__submit-form input:hover {\n  background-color: #6c757d;\n  color: #fff;\n}\n.review__submit-form span {\n  margin-top: 12px;\n  font-size: 18px;\n}\n.review__success-message {\n  color: green;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".review__form.col-4 {\n  padding: 0 0 0 24px;\n}\n.review__add {\n  display: flex;\n  flex-direction: column;\n  border: 1px solid #6c6c6c;\n  border-radius: 4px;\n}\n.review__add-title {\n  display: block;\n  border-radius: 4px;\n  border-bottom: 1px solid #6c6c6c;\n  font-size: 20px;\n  font-weight: 500;\n  padding: 8px;\n}\n.review__form-group {\n  display: flex;\n  flex-direction: column;\n  margin: 12px 12px 24px;\n}\n.review__form-group label {\n  margin-bottom: 4px;\n}\n.review__form-group textarea {\n  height: 80px;\n}\n.review__form-group .required-message {\n  color: red;\n}\n.review__submit-form {\n  margin: 8px 12px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.review__submit-form input {\n  background-color: #dadada;\n  border: 1px solid #dadada;\n  border-radius: 4px;\n  padding: 4px 16px;\n  font-weight: 500;\n}\n.review__submit-form input:hover {\n  background-color: #6c757d;\n  color: #fff;\n}\n.review__submit-form span {\n  margin-top: 12px;\n  font-size: 18px;\n}\n.review__success-message {\n  color: green;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15360,7 +15360,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".order {\n  padding: 0 0 0 24px;\n}\n.order__add {\n  border: 1px solid #6c6c6c;\n  border-radius: 4px;\n}\n.order__price {\n  background-color: #dadada;\n  border-radius: 4px;\n  border-bottom: 1px solid #6c6c6c;\n  display: flex;\n  padding: 6px;\n  align-items: center;\n}\n.order__price span {\n  margin-right: 6px;\n  font-size: 20px;\n  text-decoration: line-through;\n}\n.order__price h5 {\n  margin: 0;\n  font-size: 28px;\n}\n.order__handle {\n  margin: 32px;\n}\n.order__quantity {\n  background-color: #dadada;\n  display: flex;\n  border-radius: 4px;\n  justify-content: space-between;\n  font-size: 24px;\n  margin: 8px 0;\n}\n.order__increase, .order__decrease {\n  border: none;\n  border-radius: 4px;\n  background-color: #c7c7c7;\n  min-width: 40px;\n}\n.order__buy {\n  margin-top: 36px;\n  font-size: 22px;\n  font-weight: 400;\n  border: none;\n  background-color: #dadada;\n  border-radius: 4px;\n  width: 100%;\n}\n.order__buy:hover {\n  background-color: #6c757d;\n  color: #fff;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".order.col-4 {\n  padding: 0 0 0 24px;\n}\n.order__add {\n  border: 1px solid #6c6c6c;\n  border-radius: 4px;\n}\n.order__price {\n  background-color: #dadada;\n  border-radius: 4px;\n  border-bottom: 1px solid #6c6c6c;\n  display: flex;\n  padding: 6px;\n  align-items: center;\n}\n.order__price span {\n  margin-right: 6px;\n  font-size: 20px;\n  text-decoration: line-through;\n}\n.order__price h5 {\n  margin: 0;\n  font-size: 28px;\n}\n.order__handle {\n  margin: 32px;\n}\n.order__quantity {\n  background-color: #dadada;\n  display: flex;\n  border-radius: 4px;\n  justify-content: space-between;\n  font-size: 24px;\n  margin: 8px 0;\n}\n.order__increase, .order__decrease {\n  border: none;\n  border-radius: 4px;\n  background-color: #c7c7c7;\n  min-width: 40px;\n}\n.order__buy {\n  margin-top: 36px;\n  font-size: 22px;\n  font-weight: 400;\n  border: none;\n  background-color: #dadada;\n  border-radius: 4px;\n  width: 100%;\n}\n.order__buy:hover {\n  background-color: #6c757d;\n  color: #fff;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15528,7 +15528,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".shop__title {\n  align-items: center;\n}\n.shop__title h3 {\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n}\n.shop__title span {\n  padding: 0;\n  margin: 0;\n  font-size: 18px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".shop__title {\n  align-items: center;\n}\n.shop__title h4 {\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n}\n.shop__title span {\n  padding: 0;\n  margin: 0;\n  font-size: 18px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

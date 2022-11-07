@@ -9,7 +9,7 @@ function TitleShop(props) {
     
     return (
         <div className="shop__title">
-            <h3>Books</h3>
+            <h4>Books</h4>
             <span>
                 {" "}
                 (Filtered by{" "}

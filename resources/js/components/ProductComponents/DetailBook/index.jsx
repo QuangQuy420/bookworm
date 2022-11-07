@@ -11,7 +11,7 @@ function DetailBook(props) {
     return (
         <div className='detail col-8'>
             <div className="row detail__container">
-                <div className="col-4">
+                <div className="img col-4">
                     <img className='detail__img' src={urlBook} alt="" />
                     <span className="detail__author">By {author_name}</span>
                 </div>

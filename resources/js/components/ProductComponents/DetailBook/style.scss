@@ -14,7 +14,11 @@
         margin: 12px 0;
     }
 
-    &__content {
+    &__content.col-8 {
         margin: 20px 0;
+    }
+
+    &__container .img {
+        padding-left: 0;
     }
 }

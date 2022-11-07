@@ -64,7 +64,7 @@ function Product(props) {
 
     return (
         <>
-            <h5 className="product__title">{categoryName[0].toUpperCase() + categoryName.slice(1)}</h5>
+            <h4 className="product__title">{categoryName[0].toUpperCase() + categoryName.slice(1)}</h4>
             <div className="product__book row">
                 <DetailBook />
                 <Order />

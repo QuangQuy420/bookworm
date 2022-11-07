@@ -11,8 +11,9 @@
         padding-bottom: 12px;
     }
 
-    &__content {
+    &__content.container {
         max-width: 900px;
+        margin-top: 60px;
     }
 
     &__description {
@@ -22,11 +23,11 @@
             margin: 24px 0 36px 0;
         }
 
-        margin-bottom: 24px;
+        margin-bottom: 40px;
     }
 
     &__history {
-        & h4 {
+        & h5 {
             margin-bottom: 12px;
         }
 
