@@ -1,5 +1,6 @@
 .card {
     width: 280px;
+    cursor: pointer;
 
     &__image {
         width: 100%;
@@ -16,6 +17,10 @@
 
     &-body {
         margin-bottom: 40px;
+    }
+
+    &-footer {
+        background-color: #dadada;
     }
 }
 

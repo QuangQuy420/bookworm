@@ -5,7 +5,7 @@ function Footer(props) {
     return (
         <div className='footer'>
             <div className="footer__image">
-                <img src="https://lh3.googleusercontent.com/kSue6Hy7y1joZRrGLZOhOZKUrQ1OvKFO74qhM5HHztyg71lDHK3K-631VrSiHbljuhBG7pJH90RS3MAPvrcODd90aYy4V93RTw=w960-rj-nu-e365" alt="bookworm" />
+                <img src="/images/logo-footer.png" alt="bookworm" />
             </div>
             <div className="footer__info">
                 <h6>BOOKWORM</h6>

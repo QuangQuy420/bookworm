@@ -44,6 +44,18 @@
         justify-content: center;
         align-items: center;
         
+        & input {
+            background-color: #dadada;
+            border: 1px solid #dadada;
+            border-radius: 4px;
+            padding: 4px 16px;
+        }
+
+        & input:hover {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
         & span {
             margin-top: 12px;
             font-size: 18px;

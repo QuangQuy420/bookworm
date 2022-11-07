@@ -32,9 +32,14 @@
                 margin-bottom: 24px;
                 min-width: 240px;
                 border: none;
-                background-color: rgb(200, 200, 200);
+                background-color: #dadada;
                 padding: 6px 0;
                 border-radius: 4px;
+            }
+
+            & button:hover {
+                background-color: #6c757d;
+                color: #fff;
             }
         }
     }

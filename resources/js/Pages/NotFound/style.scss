@@ -1,0 +1,27 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 200px;
+    height: 969px;
+    background-color: #dadada;
+
+    &-title {
+        font-size: 100px;
+    }
+
+    &-content {
+        font-size: 50px;
+        padding-bottom: 20px;
+    }
+
+    &-back {
+        font-size: 20px;
+        color: blue;
+        cursor: pointer;
+    }
+
+    &-back:hover {
+        text-decoration: underline;
+    }
+}

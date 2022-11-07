@@ -7,7 +7,7 @@
     }
 
     &__price {
-        background-color: rgb(221, 221, 221);
+        background-color: #dadada;
         border-radius: 4px;
         border-bottom: 1px solid rgb(108, 108, 108);
         display: flex;
@@ -31,8 +31,9 @@
     }
 
     &__quantity {
-        background-color: rgb(221, 221, 221);
+        background-color: #dadada;
         display: flex;
+        border-radius: 4px;
         justify-content: space-between;
         font-size: 24px;
         margin: 8px 0;
@@ -41,6 +42,7 @@
     &__increase,
     &__decrease {
         border: none;
+        border-radius: 4px;
         background-color: rgb(199, 199, 199);
         min-width: 40px;
     }
@@ -50,7 +52,13 @@
         font-size: 22px;
         font-weight: 400;
         border: none;
-        background-color: rgb(221, 221, 221);
+        background-color: #dadada;
+        border-radius: 4px;
         width: 100%;
+    }
+
+    &__buy:hover {
+        background-color: #6c757d;
+        color: #fff;
     }
 }

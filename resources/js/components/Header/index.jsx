@@ -54,9 +54,10 @@ function Header(props) {
                         <div>
                             <img
                                 alt="book"
-                                src="https://bom.so/54veOe"
+                                src="images/logo-header.png"
                                 style={{
                                     width: 32,
+                                    marginRight: 12
                                 }}
                             />
                             <span>BOOKWORM</span>
