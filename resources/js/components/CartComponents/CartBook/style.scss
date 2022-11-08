@@ -5,9 +5,10 @@
         border-left: 1px solid #333;
         border-right: 1px solid #333;
 
-        &-container {
+        &-container.col-6 {
             display: flex;
             margin: 12px 0;
+            cursor: pointer;
         }
 
         &-info {

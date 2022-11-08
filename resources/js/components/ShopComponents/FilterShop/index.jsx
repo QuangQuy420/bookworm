@@ -13,10 +13,10 @@ function FilterShop(props) {
     return (
         <>
             <span className="filter-by">Filter By</span>
-            <div className="filter__author">
+            <div className="filter__category">
                 <Category listName={nameCategory}/>
             </div>
-            <div className="filter__category">
+            <div className="filter__author">
                 <Author listName={nameAuthor}/>
             </div>
             <div className="filter__rating">

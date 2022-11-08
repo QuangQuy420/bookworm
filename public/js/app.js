@@ -12425,8 +12425,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/CartComponents/CartBook/style.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -12436,6 +12438,7 @@ __webpack_require__.r(__webpack_exports__);
 function CartBook(props) {
   var carts = props.carts,
       onCountTotal = props.onCountTotal;
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
 
   var handleQuantity = function handleQuantity(quantity, id) {
     if (onCountTotal) {
@@ -12443,11 +12446,20 @@ function CartBook(props) {
     }
   };
 
+  var handleGetDetail = function handleGetDetail(bookId) {
+    localStorage.setItem("book_id", JSON.stringify(bookId));
+    var path = "/shop/product/".concat(bookId);
+    navigate(path);
+  };
+
   var bookSlides = carts.map(function (book) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "row cart__details",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "cart__details-container col-6",
+        onClick: function onClick() {
+          return handleGetDetail(book.book_id);
+        },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
           src: "images/".concat(book.book_cover_photo ? book.book_cover_photo : 'default-image', ".jpg"),
           className: "cart__details-img"
@@ -12650,6 +12662,7 @@ function Payment(props) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h5", {
           children: "$" + totalPrice.toFixed(2)
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
+          disabled: totalPrice == 0,
           onClick: handleOrder,
           children: "Place Order"
         })]
@@ -13194,10 +13207,15 @@ function LogIn(props) {
   var showLogin = props.showLogin,
       signIn = props.signIn;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(showLogin ? showLogin : false),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      modal = _useState2[0],
-      setModal = _useState2[1];
+      failLogin = _useState2[0],
+      setFailLogin = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(showLogin ? showLogin : false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      modal = _useState4[0],
+      setModal = _useState4[1];
 
   var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_6__.useForm)(),
       register = _useForm.register,
@@ -13208,27 +13226,51 @@ function LogIn(props) {
 
   var onSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(data) {
-      var result;
+      var _result, result;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _context.prev = 0;
+              _context.next = 3;
               return _apiServices_authServices__WEBPACK_IMPORTED_MODULE_3__.logIn("/login", data);
 
-            case 2:
+            case 3:
+              _result = _context.sent;
+              localStorage.setItem("token", JSON.stringify(_result.token));
+              localStorage.setItem("name_user", JSON.stringify(_result.first_name + _result.last_name));
+              setModal(!modal);
+              window.location.reload();
+              _context.next = 14;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](0);
+              setFailLogin(true);
+              setTimeout(function () {
+                setFailLogin(false);
+              }, 3000);
+
+            case 14:
+              _context.next = 16;
+              return _apiServices_authServices__WEBPACK_IMPORTED_MODULE_3__.logIn("/login", data);
+
+            case 16:
               result = _context.sent;
+              console.log(result);
               localStorage.setItem("token", JSON.stringify(result.token));
               localStorage.setItem("name_user", JSON.stringify(result.first_name + result.last_name));
               setModal(!modal);
               window.location.reload();
 
-            case 7:
+            case 22:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee);
+      }, _callee, null, [[0, 10]]);
     }));
 
     return function onSubmit(_x) {
@@ -13259,7 +13301,6 @@ function LogIn(props) {
               htmlFor: "email",
               children: "User Name"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", _objectSpread(_objectSpread({
-              value: "kassulke.dolly@example.org",
               id: "email"
             }, register("email", {
               required: true
@@ -13275,7 +13316,6 @@ function LogIn(props) {
               htmlFor: "password",
               children: "Password"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", _objectSpread(_objectSpread({
-              value: "password",
               id: "password"
             }, register("password", {
               required: true
@@ -13285,7 +13325,10 @@ function LogIn(props) {
               className: "login-message",
               children: "This field is required"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          }), failLogin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+            className: "login-fail",
+            children: "Email or Password not correct"
+          }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             className: "login__submit",
             type: "submit"
           })]
@@ -13574,7 +13617,8 @@ function FormReview(props) {
           }, register("reviewTitle", {
             required: true
           })), {}, {
-            type: "text"
+            type: "text",
+            maxLength: "120"
           })), errors.reviewTitle && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
             className: "required-message",
             children: "This field is required"
@@ -13986,6 +14030,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
 /* harmony import */ var _Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Actions/bookActions */ "./resources/js/Actions/bookActions.js");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/ShopComponents/Author/style.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -14025,6 +14070,19 @@ function Author(props) {
 
   var currentIndex = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(-1);
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("0"),
+      _useState6 = _slicedToArray(_useState5, 2),
+      open = _useState6[0],
+      setOpen = _useState6[1];
+
+  var toggle = function toggle(id) {
+    if (open === id) {
+      setOpen("0");
+    } else {
+      setOpen(id);
+    }
+  };
+
   var handleFilter = function handleFilter(authorId, index) {
     if (currentIndex.current !== index) {
       setIsSwitch(!isSwitch);
@@ -14036,7 +14094,7 @@ function Author(props) {
       setIsSwitch(!isSwitch);
       setActive(false);
       currentIndex.current = -1;
-      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByAuthor)(''));
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByAuthor)(""));
       dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
     }
   };
@@ -14050,13 +14108,23 @@ function Author(props) {
       children: value.author_name
     }, index);
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
-      children: "Author"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
-      className: "list-filter",
-      children: slides
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.Accordion, {
+      open: open,
+      toggle: toggle,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.AccordionItem, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.AccordionHeader, {
+          targetId: "1",
+          children: "Author"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.AccordionBody, {
+          accordionId: "1",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
+            className: "list-filter",
+            children: slides
+          })
+        })]
+      })
+    })
   });
 }
 
@@ -14079,6 +14147,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Actions/bookActions */ "./resources/js/Actions/bookActions.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/ShopComponents/Category/style.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -14117,6 +14186,19 @@ function Category(props) {
 
   var currentIndex = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(-1);
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("0"),
+      _useState6 = _slicedToArray(_useState5, 2),
+      open = _useState6[0],
+      setOpen = _useState6[1];
+
+  var toggle = function toggle(id) {
+    if (open === id) {
+      setOpen("0");
+    } else {
+      setOpen(id);
+    }
+  };
+
   var handleFilter = function handleFilter(categoryId, index) {
     if (currentIndex.current !== index) {
       setIsSwitch(!isSwitch);
@@ -14128,7 +14210,7 @@ function Category(props) {
       setIsSwitch(!isSwitch);
       setActive(false);
       currentIndex.current = -1;
-      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByCategory)(''));
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByCategory)(""));
       dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
     }
   };
@@ -14142,13 +14224,23 @@ function Category(props) {
       children: value.category_name.charAt(0).toUpperCase() + value.category_name.slice(1)
     }, index);
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
-      children: "Category"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
-      className: "list-filter",
-      children: slides
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.Accordion, {
+      open: open,
+      toggle: toggle,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.AccordionItem, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.AccordionHeader, {
+          targetId: "1",
+          children: "Category"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.AccordionBody, {
+          accordionId: "1",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
+            className: "list-filter",
+            children: slides
+          })
+        })]
+      })
+    })
   });
 }
 
@@ -14350,12 +14442,12 @@ function FilterShop(props) {
       className: "filter-by",
       children: "Filter By"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-      className: "filter__author",
+      className: "filter__category",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Category__WEBPACK_IMPORTED_MODULE_3__.default, {
         listName: nameCategory
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-      className: "filter__category",
+      className: "filter__author",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Author__WEBPACK_IMPORTED_MODULE_2__.default, {
         listName: nameAuthor
       })
@@ -14387,6 +14479,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Actions/bookActions */ "./resources/js/Actions/bookActions.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/ShopComponents/Rating/style.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -14425,6 +14518,19 @@ function Rating(props) {
 
   var currentIndex = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(-1);
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("0"),
+      _useState6 = _slicedToArray(_useState5, 2),
+      open = _useState6[0],
+      setOpen = _useState6[1];
+
+  var toggle = function toggle(id) {
+    if (open === id) {
+      setOpen("0");
+    } else {
+      setOpen(id);
+    }
+  };
+
   var handleFilter = function handleFilter(star, index) {
     if (currentIndex.current !== index) {
       setIsSwitch(!isSwitch);
@@ -14436,7 +14542,7 @@ function Rating(props) {
       setIsSwitch(!isSwitch);
       setActive(false);
       currentIndex.current = -1;
-      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByRating)(''));
+      dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.filterByRating)(""));
       dispatch((0,_Actions_bookActions__WEBPACK_IMPORTED_MODULE_2__.handlePaginate)(1));
     }
   };
@@ -14450,13 +14556,23 @@ function Rating(props) {
       children: [star, " Star"]
     }, index);
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
-      children: "Rating Review"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
-      className: "list-filter",
-      children: slides
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.Accordion, {
+      open: open,
+      toggle: toggle,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.AccordionItem, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.AccordionHeader, {
+          targetId: "1",
+          children: "Rating Review"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__.AccordionBody, {
+          accordionId: "1",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
+            className: "list-filter",
+            children: slides
+          })
+        })]
+      })
+    })
   });
 }
 
@@ -15072,7 +15188,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".cart__details {\n  border-bottom: 1px solid #333;\n  border-left: 1px solid #333;\n  border-right: 1px solid #333;\n}\n.cart__details-container {\n  display: flex;\n  margin: 12px 0;\n}\n.cart__details-info {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  margin-left: 12px;\n}\n.cart__details-img {\n  width: 150px;\n}\n.cart__details-title {\n  font-size: 24px;\n  font-weight: 500;\n  overflow: hidden;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n}\n.cart__details-price {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.cart__details-price span {\n  text-align: center;\n  text-decoration: line-through;\n}\n.cart__details-price p {\n  text-align: center;\n  margin: 0;\n  font-weight: 500;\n  font-size: 20px;\n}\n.cart__price-total {\n  display: flex;\n  font-weight: 500;\n  font-size: 20px;\n  align-items: center;\n  justify-content: center;\n}\n.cart__quantity {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.cart__quantity-decrease, .cart__quantity-increase {\n  border: none;\n  background-color: #dadada;\n}\n.cart__quantity span {\n  padding: 0 12px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".cart__details {\n  border-bottom: 1px solid #333;\n  border-left: 1px solid #333;\n  border-right: 1px solid #333;\n}\n.cart__details-container.col-6 {\n  display: flex;\n  margin: 12px 0;\n  cursor: pointer;\n}\n.cart__details-info {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  margin-left: 12px;\n}\n.cart__details-img {\n  width: 150px;\n}\n.cart__details-title {\n  font-size: 24px;\n  font-weight: 500;\n  overflow: hidden;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n}\n.cart__details-price {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.cart__details-price span {\n  text-align: center;\n  text-decoration: line-through;\n}\n.cart__details-price p {\n  text-align: center;\n  margin: 0;\n  font-weight: 500;\n  font-size: 20px;\n}\n.cart__price-total {\n  display: flex;\n  font-weight: 500;\n  font-size: 20px;\n  align-items: center;\n  justify-content: center;\n}\n.cart__quantity {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.cart__quantity-decrease, .cart__quantity-increase {\n  border: none;\n  background-color: #dadada;\n}\n.cart__quantity span {\n  padding: 0 12px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15240,7 +15356,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".login__user, .login__password {\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 24px;\n}\n.login__user label, .login__password label {\n  font-weight: 500;\n  font-size: 18px;\n}\n.login-message {\n  color: red;\n}\n.login__submit {\n  display: flex;\n  justify-content: center;\n  margin: 0 auto;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".login__user, .login__password {\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 24px;\n}\n.login__user label, .login__password label {\n  font-weight: 500;\n  font-size: 18px;\n}\n.login-message {\n  color: red;\n}\n.login__submit {\n  display: flex;\n  justify-content: center;\n  margin: 0 auto;\n}\n.login-fail {\n  display: block;\n  color: red;\n  margin-bottom: 12px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15384,7 +15500,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".accordion .accordion-body {\n  padding: 0;\n}\n.accordion .accordion-button:focus {\n  border-color: none;\n  box-shadow: none;\n}\n.accordion .accordion-button {\n  font-size: 18px;\n  font-weight: 500;\n  padding: 10px 12px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15480,7 +15596,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".filter-by {\n  display: flex;\n  height: 38px;\n  align-items: center;\n  margin-bottom: 18px;\n}\n\n.list-filter {\n  margin: 8px 0;\n  padding: 0;\n  list-style: none;\n}\n\n.item-filter {\n  padding: 0 20px;\n  cursor: pointer;\n}\n\n.item-active {\n  background-color: #dadada;\n}\n\n.filter__category,\n.filter__author,\n.filter__rating {\n  border: 1px solid;\n  margin-bottom: 12px;\n  border-radius: 4px;\n  padding: 12px 0;\n}\n.filter__category h5,\n.filter__author h5,\n.filter__rating h5 {\n  margin: 0 0 0 12px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".filter-by {\n  display: flex;\n  height: 38px;\n  align-items: center;\n  margin-bottom: 18px;\n}\n\n.list-filter {\n  margin: 8px 0;\n  padding: 0;\n  list-style: none;\n}\n\n.item-filter {\n  padding: 4px 20px;\n  cursor: pointer;\n}\n\n.item-active {\n  background-color: #dadada;\n}\n\n.filter__category,\n.filter__author,\n.filter__rating {\n  border: 1px solid;\n  margin-bottom: 12px;\n  border-radius: 4px;\n}\n.filter__category h5,\n.filter__author h5,\n.filter__rating h5 {\n  margin: 0 0 0 12px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

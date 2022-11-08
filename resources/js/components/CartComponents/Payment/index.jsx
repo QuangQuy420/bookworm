@@ -56,7 +56,7 @@ function Payment(props) {
                 <div className="cart__payment-title">Cart Totals</div>
                 <div className="cart__payment-content">
                     <h5>{"$" + totalPrice.toFixed(2)}</h5>
-                    <button onClick={handleOrder}>Place Order</button>
+                    <button disabled={totalPrice == 0} onClick={handleOrder}>Place Order</button>
                 </div>
                 {showLogin ? <LogIn showLogin={showLogin} signIn={''} /> : ''}
                 {showMessage ? <ToastSuccess title={'Place Order Success'} content={'You will be redirected to the homepage in 10 seconds'} />  : ''}

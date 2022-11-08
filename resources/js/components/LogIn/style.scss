@@ -20,4 +20,10 @@
         justify-content: center;
         margin: 0 auto;
     }
+
+    &-fail {
+        display: block;
+        color: red;
+        margin-bottom: 12px;
+    }
 }

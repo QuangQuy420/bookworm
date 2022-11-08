@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './style.scss'
 
 function CartBook(props) {
     const { carts, onCountTotal } = props
+    let navigate = useNavigate()
 
     const handleQuantity = (quantity, id) => {
         if(onCountTotal) {
@@ -10,10 +12,19 @@ function CartBook(props) {
         }
     }
 
+    const handleGetDetail = (bookId) => {
+        localStorage.setItem("book_id",JSON.stringify(bookId)); 
+        let path = `/shop/product/${bookId}`; 
+        navigate(path);
+    }
+
     const bookSlides = carts.map((book) => {
         return (
             <div key={book.book_id} className="row cart__details">
-                <div className="cart__details-container col-6">
+                <div 
+                    className="cart__details-container col-6"
+                    onClick={() => handleGetDetail(book.book_id)}
+                >
                     <img
                         src={`images/${book.book_cover_photo ? book.book_cover_photo : 'default-image'}.jpg`}
                         className="cart__details-img"

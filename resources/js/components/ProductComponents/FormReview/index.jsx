@@ -43,6 +43,7 @@ function FormReview(props) {
                             id="reviewTitle"
                             {...register("reviewTitle", { required: true })}
                             type="text"
+                            maxLength = "120"
                         />
                         {errors.reviewTitle && (
                             <span className="required-message">

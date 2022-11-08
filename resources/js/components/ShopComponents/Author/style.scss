@@ -1,0 +1,16 @@
+.accordion {
+    & .accordion-body {
+        padding: 0;
+    }
+
+    & .accordion-button:focus {
+        border-color: none;
+        box-shadow: none;
+    }
+
+    & .accordion-button {
+        font-size: 18px;
+        font-weight: 500;
+        padding: 10px 12px;
+    }
+}
