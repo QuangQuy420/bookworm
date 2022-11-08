@@ -6,7 +6,7 @@ import * as authServices from "../../apiServices/authServices";
 import "./style.scss";
 
 function LogIn(props) {
-    const { showLogin, signIn } = props;
+    const { showLogin, signIn, onShow } = props;
     const [failLogin, setFailLogin] = useState(false)
     const [modal, setModal] = useState(showLogin ? showLogin : false);
     
@@ -41,6 +41,9 @@ function LogIn(props) {
 
     const toggle = () => {
         setModal(!modal);
+        if(onShow) {
+            onShow(!showLogin)
+        }
     };
 
     return (

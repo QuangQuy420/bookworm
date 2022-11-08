@@ -50,6 +50,10 @@ function Payment(props) {
         }
     };
 
+    const show = (show) => {
+        setShowLogin(show)
+    }
+
     return (
         <div className="cart__payment col-4">
             <div className="cart__payment-container">
@@ -58,7 +62,7 @@ function Payment(props) {
                     <h5>{"$" + totalPrice.toFixed(2)}</h5>
                     <button disabled={totalPrice == 0} onClick={handleOrder}>Place Order</button>
                 </div>
-                {showLogin ? <LogIn showLogin={showLogin} signIn={''} /> : ''}
+                {showLogin ? <LogIn showLogin={showLogin} signIn={''} onShow={show} /> : ''}
                 {showMessage ? <ToastSuccess title={'Place Order Success'} content={'You will be redirected to the homepage in 10 seconds'} />  : ''}
             </div>
         </div>
